@@ -24,3 +24,9 @@ void st_rotate(t_stack *stack_x)
 		ft_stackqueue(stack_x, node);
 	}
 }
+
+void st_rotate_two(t_stack *stack_x, t_stack *stack_y)
+{
+	st_rotate(stack_x);
+	st_rotate(stack_y);
+}

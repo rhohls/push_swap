@@ -24,3 +24,9 @@ void st_revrotate(t_stack *stack_x)
 		ft_stackpush(stack_x, node);
 	}
 }
+
+void st_revrotate_two(t_stack *stack_x, t_stack *stack_y)
+{
+	st_revrotate(stack_x);
+	st_revrotate(stack_y);
+}

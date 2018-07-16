@@ -22,6 +22,7 @@ void print_stacks(t_stack *stack_a, t_stack *stack_b)
 	int		*num_b;
 	lst_a = stack_a->start;
 	lst_b = stack_b->start;
+
 	while (lst_a || lst_b)
 	{
 		if (lst_a)

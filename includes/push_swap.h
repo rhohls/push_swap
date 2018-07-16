@@ -15,11 +15,22 @@
 
 # include "../libft/includes/libft.h"
 
+# define INT_MIN -2147483648
+
 void    st_push(t_stack *stack_from, t_stack *stack_to);
-void    t_revrotate(t_stack *stack_x);
+void    st_revrotate(t_stack *stack_x);
 void    st_rotate(t_stack *stack_x);
 void    st_swap(t_stack *stack_x);
 
-void print_stacks(t_stack *stack_a, t_stack *stack_b);
+void    st_revrotate_two(t_stack *stack_x, t_stack *stack_y);
+void    st_rotate_two(t_stack *stack_x, t_stack *stack_y);
+void    st_swap_two(t_stack *stack_x, t_stack *stack_y);
+
+void    print_stacks(t_stack *stack_a, t_stack *stack_b);
+void	compare(t_stack *stack_a, t_stack *stack_b);
+
+void    ret_ko(void);
+void    ret_ok(void);
+int		ret_error(void);
 
 #endif

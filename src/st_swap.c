@@ -27,3 +27,9 @@ void st_swap(t_stack *stack_x)
         ft_stackpush(stack_x, node2);
     }
 }
+
+void st_swap_two(t_stack *stack_x, t_stack *stack_y)
+{
+    st_swap(stack_x);
+    st_swap(stack_y);
+}
