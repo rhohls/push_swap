@@ -11,3 +11,16 @@
 /* ************************************************************************** */
 
 //serve a push a
+
+#include "../includes/push_swap.h"
+
+void st_revrotate(t_stack *stack_x)
+{
+	t_list *node;
+
+	if (stack_x->length > 0)
+	{
+		node = ft_stackserve(stack_x);
+		ft_stackpush(stack_x, node);
+	}
+}

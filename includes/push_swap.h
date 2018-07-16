@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stackpop.c                                      :+:      :+:    :+:   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhohls <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/12 13:50:07 by rhohls            #+#    #+#             */
-/*   Updated: 2018/07/13 09:49:34 by rhohls           ###   ########.fr       */
+/*   Created: 2018/07/16 07:02:49 by rhohls            #+#    #+#             */
+/*   Updated: 2018/07/16 07:04:45 by rhohls           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
-t_list *ft_stackpop(t_stack *stack)
-{
-    t_list *popped;
+# include "../libft/includes/libft.h"
 
-    if (stack && stack->start)
-    {
-        popped = stack->start;
-        stack->start = stack->start->next;
-        stack->length--;
-		popped->next = NULL;
-    }
-    else
-        popped = NULL;
-    return (popped);
-}
+void    st_push(t_stack *stack_from, t_stack *stack_to);
+void    t_revrotate(t_stack *stack_x);
+void    st_rotate(t_stack *stack_x);
+void    st_swap(t_stack *stack_x);
+
+void print_stacks(t_stack *stack_a, t_stack *stack_b);
+
+#endif

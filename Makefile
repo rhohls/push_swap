@@ -5,36 +5,45 @@
 #                                                     +:+ +:+         +:+      #
 #    By: rhohls <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/07/12 07:04:12 by rhohls            #+#    #+#              #
-#    Updated: 2018/07/12 07:27:34 by rhohls           ###   ########.fr        #
+#    Created: 2018/06/22 11:19:09 by rhohls            #+#    #+#              #
+#    Updated: 2018/07/16 09:32:55 by rhohls           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# ifeq (name_C) dont make
-#
-# have seperate cpy cmds
-#
-# for clean dont cpy and run in each folder
+NAME = ps_checker 
+SRCS = ./src/
+OBJF = ./objs/
+CCF = -Wall -Werror -Wextra
+LIBFT = ./libft/libft.a
 
-NAME_C = checker
-CHK_DIR = ./checker
-NAME_P = push_swap
-PSHSWP_DIR = ./pushswap_ai
+MAIN ?= main.c
+MAINT ?= main_test.c
 
-$(NAME_C):
-	make -C $(CHK_DIR)
-	cp $(CHK_DIR)/$(NAME_C) ./
+FILES = *.c
+OBJS = $(FILES: .c=.o)
 
-$(NAME_C):
-	make -C ./checker
-	cp $(PSHSWP_DIR)/$(NAME_C) ./
+$(NAME): compile
+	make -C libft
+	gcc -o $(NAME) $(SRCS)$(OBJS) $(LIBFT)
+	#$(OBJF)$(OBJS)
 
-all: $(NAME_C) $(NAME_P)
+compile: $(OBJ)
+	gcc -c $(SRCS)$(FILES)
+#	@mv $(SRCS)$(OBJS) $(OBJF)
+	mv *.o $(OBJF)
+
+
+all: $(NAME)
 
 clean:
+	/bin/rm -f $(OBJF)*.o
 
 fclean: clean
+	/bin/rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: re fclean clean all
+.PHONY: re fclean clean all test clean
+
+
+

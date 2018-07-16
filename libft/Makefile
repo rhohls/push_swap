@@ -6,7 +6,7 @@
 #    By: rhohls <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/01 07:07:02 by rhohls            #+#    #+#              #
-#    Updated: 2018/06/19 11:14:33 by rhohls           ###   ########.fr        #
+#    Updated: 2018/07/13 09:52:18 by rhohls           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ HEAD = -I./includes/
 FILES = $(SRCS)ft_stackpop.c	\
 		$(SRCS)ft_stackpush.c	\
 		$(SRCS)ft_stackqueue.c	\
+		$(SRCS)ft_stackserve.c	\
 		$(SRCS)get_next_line.c	\
 		$(SRCS)ft_atoi.c		\
 		$(SRCS)ft_bzero.c		\

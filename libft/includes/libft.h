@@ -6,7 +6,7 @@
 /*   By: rhohls <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 11:28:36 by rhohls            #+#    #+#             */
-/*   Updated: 2018/06/19 11:19:49 by rhohls           ###   ########.fr       */
+/*   Updated: 2018/07/13 09:51:37 by rhohls           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void				ft_stackpush(t_stack *stack, t_list *new_node);
 t_list				*ft_stackpop(t_stack *stack);
 void				ft_stackqueue(t_stack *stack, t_list *new_node);
+t_list				*ft_stackserve(t_stack *stack);
 
 int					ft_power(int base, int power);
 int					ft_whitespace(char c);
