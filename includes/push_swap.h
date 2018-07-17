@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 # include "../libft/includes/libft.h"
+# include <stdlib.h>
 
 # define INT_MIN -2147483648
 
@@ -28,9 +29,11 @@ void    st_swap_two(t_stack *stack_x, t_stack *stack_y);
 
 void    print_stacks(t_stack *stack_a, t_stack *stack_b);
 void	compare(t_stack *stack_a, t_stack *stack_b);
+int		instructions_loop(t_stack *stack_a, t_stack *stack_b);
 
 void    ret_ko(void);
 void    ret_ok(void);
 int		ret_error(void);
+int		ret_newl(void);
 
 #endif

@@ -12,22 +12,6 @@
 
 #include "../includes/push_swap.h"
 
-void ret_ko(void)
-{
-    ft_putendl("KO");
-}
-
-void ret_ok(void)
-{
-    ft_putendl("OK");
-}
-
-int ret_error(void)
-{
-    ft_putendl("ERROR");
-    return (1);
-}
-
 void compare(t_stack *stack_a, t_stack *stack_b)
 {
     

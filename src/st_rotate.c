@@ -10,11 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//pop a queue a
-
 #include "../includes/push_swap.h"
 
-void st_rotate(t_stack *stack_x)
+/*
+** pop a queue a
+*/
+
+void	st_rotate(t_stack *stack_x)
 {
 	t_list *node;
 
@@ -25,7 +27,7 @@ void st_rotate(t_stack *stack_x)
 	}
 }
 
-void st_rotate_two(t_stack *stack_x, t_stack *stack_y)
+void	st_rotate_two(t_stack *stack_x, t_stack *stack_y)
 {
 	st_rotate(stack_x);
 	st_rotate(stack_y);

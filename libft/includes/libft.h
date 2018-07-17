@@ -6,13 +6,15 @@
 /*   By: rhohls <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 11:28:36 by rhohls            #+#    #+#             */
-/*   Updated: 2018/07/13 09:51:37 by rhohls           ###   ########.fr       */
+/*   Updated: 2018/07/16 15:14:14 by rhohls           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# define INTMAX 2147483647
+# define INTMIN (-INTMAX -1)
 # include <string.h>
 # include "get_next_line.h"
 
@@ -105,4 +107,7 @@ int					ft_strncmp_simple(const char *s1, const char *s2,
 										size_t len);
 int					ft_nextdig(char *str);
 char				*ft_strjoinfree(char *s1, char const *s2);
+
+int					ft_atoi_long(const char *str);
+int					ft_strcount(char **str);
 #endif

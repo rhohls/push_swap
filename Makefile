@@ -28,7 +28,7 @@ $(NAME): compile
 	#$(OBJF)$(OBJS)
 
 compile: $(OBJ)
-	gcc -c $(SRCS)$(FILES)
+	gcc -c $(SRCS)$(FILES) $(CCF)
 #	@mv $(SRCS)$(OBJS) $(OBJF)
 	mv *.o $(OBJF)
 
