@@ -5,45 +5,69 @@
 #                                                     +:+ +:+         +:+      #
 #    By: rhohls <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/06/22 11:19:09 by rhohls            #+#    #+#              #
-#    Updated: 2018/07/16 09:32:55 by rhohls           ###   ########.fr        #
+#    Created: 2018/07/17 13:08:28 by rhohls            #+#    #+#              #
+#    Updated: 2018/07/17 13:12:15 by rhohls           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ps_checker 
-SRCS = ./src/
-OBJF = ./objs/
-CCF = -Wall -Werror -Wextra
-LIBFT = ./libft/libft.a
+CHECK = checker
+PUSHSWAP = push_swap
 
-MAIN ?= main.c
-MAINT ?= main_test.c
+# Path
+SRC_PATH = ./src/
+OBJ_PATH = ./objs/
+INC_PATH = ./includes/
+LIB_PATH = ./libft/
 
-FILES = *.c
-OBJS = $(FILES: .c=.o)
+# Files
+SRC_FILE =	inits.c        \
+			print_stuff.c  \
+			st_push.c      \
+			st_rotate.c	   \
+			compare.c      \
+			instructions.c \
+			returns.c      \
+			st_revrotate.c \
+			st_swap.c	   \
 
-$(NAME): compile
-	make -C libft
-	gcc -o $(NAME) $(SRCS)$(OBJS) $(LIBFT)
-	#$(OBJF)$(OBJS)
+OBJ_FILE = $(SRC_FILE:%.c=%.o)
 
-compile: $(OBJ)
-	gcc -c $(SRCS)$(FILES) $(CCF)
-#	@mv $(SRCS)$(OBJS) $(OBJF)
-	mv *.o $(OBJF)
+SRC = $(addprefix $(SRC_PATH), $(SRC_FILE))
+OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILE))
 
+#Compile
+CCFLAGS = -Wall -Werror -Wextra
+CC = gcc $(CCFLAGS)
 
-all: $(NAME)
+LIBF = -L $(LIB_PATH)libft.a
 
-clean:
-	/bin/rm -f $(OBJF)*.o
+#Make Commands
+all: $(CHECK) $(PUSHSWAP)
 
-fclean: clean
-	/bin/rm -f $(NAME)
+$(CHECK): $(OBJ) $(INC_PATH) ./src_check/checker.c
+	@make -C./libft/
+	@$(CC) -o $@ $(LIBF) $(OBJ) ./src_check/checker.c 
 
-re: fclean all
+$(PUSHSWAP): $(OBJ) $(INC_PATH) ./src_push/push_swap.c
+	@make -C./libft/
+	@$(CC)  -o $@ $(LIBF) $(LFT) $(OBJ) ./src_push/push_swap.c
 
-.PHONY: re fclean clean all test clean
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+	@$(CC) -I$(INC_PATH) -o $@ -c $<
 
+clean: cleanlib
+	/bin/rm -rf $(OBJ)
 
+fclean: clean fcleanlib
+	@rm -f $(CHECK)
+	@rm -f $(PUSHSWAP)
 
+cleanlib:
+	@make clean -C $(LIB_PATH)
+
+fcleanlib:
+	@make fclean -C $(LIB_PATH)
+
+re : fclean all
+
+.PHONY: re fclean clean all

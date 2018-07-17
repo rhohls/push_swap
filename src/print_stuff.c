@@ -18,7 +18,7 @@ static t_list	*print_it(t_list *lst_x)
 	int		*num_x;
 
 	num_x = (int *)(lst_x->content);
-	printf("%i", *num_x);
+	ft_putnbr(*num_x);
 	return (lst_x->next);
 }
 
@@ -34,14 +34,14 @@ void			print_stacks(t_stack *stack_a, t_stack *stack_b)
 		if (lst_a)
 			lst_a = print_it(lst_a);
 		else
-			printf(" ");
-		printf(" ");
+			ft_putstr(" ");
+		ft_putstr(" ");
 		if (lst_b)
 			lst_b = print_it(lst_b);
 		else
-			printf("   ");
-		printf("\n");
+			ft_putstr("   ");
+		ft_putstr("\n");
 	}
-	printf("-  -\na  b\n");
+	ft_putstr("-  -\na  b\n");
 	return ;
 }
