@@ -22,10 +22,12 @@ void    st_push(t_stack *stack_from, t_stack *stack_to);
 void    st_revrotate(t_stack *stack_x);
 void    st_rotate(t_stack *stack_x);
 void    st_swap(t_stack *stack_x);
-
 void    st_revrotate_two(t_stack *stack_x, t_stack *stack_y);
 void    st_rotate_two(t_stack *stack_x, t_stack *stack_y);
 void    st_swap_two(t_stack *stack_x, t_stack *stack_y);
+
+int		make_stack(char **num_str, int num_nums, t_stack *stack_a);
+void	init_nums(int *num_nums, char	***num_str, int argc, char **argv);
 
 void    print_stacks(t_stack *stack_a, t_stack *stack_b);
 void	compare(t_stack *stack_a, t_stack *stack_b);

@@ -24,7 +24,7 @@ void	ret_ok(void)
 
 int		ret_newl(void)
 {
-	ft_putendl("");
+	ft_putchar('\n');
 	return (0);
 }
 

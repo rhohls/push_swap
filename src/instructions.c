@@ -67,8 +67,8 @@ int			instructions_loop(t_stack *stack_a, t_stack *stack_b)
 			else if (loop == 0)
 				return (-1);
 		}			
-		print_stacks(stack_a, stack_b);
-		printf("\n");
+//		print_stacks(stack_a, stack_b);
+//		printf("\n");
 		free(line);
 	}
 	compare(stack_a, stack_b);

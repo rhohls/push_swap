@@ -6,7 +6,7 @@
 #    By: rhohls <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/01 07:07:02 by rhohls            #+#    #+#              #
-#    Updated: 2018/07/16 14:37:27 by rhohls           ###   ########.fr        #
+#    Updated: 2018/07/17 08:56:54 by rhohls           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME = libft.a
 SRCS = ./srcs/
 HEAD = -I./includes/
 
-FILES = $(SRCS)ft_atoi_long.c	\
+FILES = $(SRCS)ft_stacknew.c	\
+		$(SRCS)ft_atoi_long.c	\
 		$(SRCS)ft_strcount.c	\
 		$(SRCS)ft_stackpop.c	\
 		$(SRCS)ft_stackpush.c	\
