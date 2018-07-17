@@ -27,7 +27,7 @@ static int	loop_1(char *line, t_stack *stack_a, t_stack *stack_b)
 		st_push(stack_a, stack_b);
 	else if (ft_strcmp(line, "ra") == 0)
 		st_rotate(stack_a);
-	else 
+	else
 		return (0);
 	return (1);
 }
@@ -49,15 +49,16 @@ static int	loop_2(char *line, t_stack *stack_a, t_stack *stack_b)
 	else
 		return (0);
 	return (1);
-}	
+}
+
 int			instructions_loop(t_stack *stack_a, t_stack *stack_b)
 {
-	int fd;
-	char *line;
-	int loop;
+	int		fd;
+	char	*line;
+	int		loop;
 
-	fd = 1;
-	while(get_next_line(fd, &line))
+	fd = 0;
+	while (get_next_line(fd, &line))
 	{
 		if (loop_1(line, stack_a, stack_b) == 0)
 		{
@@ -66,9 +67,7 @@ int			instructions_loop(t_stack *stack_a, t_stack *stack_b)
 				break ;
 			else if (loop == 0)
 				return (-1);
-		}			
-//		print_stacks(stack_a, stack_b);
-//		printf("\n");
+		}
 		free(line);
 	}
 	compare(stack_a, stack_b);

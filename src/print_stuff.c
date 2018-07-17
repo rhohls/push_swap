@@ -13,40 +13,35 @@
 #include "../includes/push_swap.h"
 #include <stdio.h>
 
-void print_stacks(t_stack *stack_a, t_stack *stack_b)
+static t_list	*print_it(t_list *lst_x)
 {
-//--- print stacks ----//
-	t_list *lst_a;
-	t_list *lst_b;
-	int		*num_a;
-	int		*num_b;
+	int		*num_x;
+
+	num_x = (int *)(lst_x->content);
+	printf("%i", *num_x);
+	return (lst_x->next);
+}
+
+void			print_stacks(t_stack *stack_a, t_stack *stack_b)
+{
+	t_list	*lst_a;
+	t_list	*lst_b;
+
 	lst_a = stack_a->start;
 	lst_b = stack_b->start;
-
 	while (lst_a || lst_b)
 	{
 		if (lst_a)
-		{
-			num_a = (int *)(lst_a->content);
-			printf("%i", *num_a);
-			lst_a = lst_a->next;
-		}
+			lst_a = print_it(lst_a);
 		else
 			printf(" ");
-		
 		printf(" ");
-
 		if (lst_b)
-		{
-			num_b = (int *)(lst_b->content);
-			printf("%i", *num_b);
-			lst_b = lst_b->next;
-		}
+			lst_b = print_it(lst_b);
 		else
-			printf("   ");		
+			printf("   ");
 		printf("\n");
 	}
-	printf("-  -\n");
-	printf("a  b\n");
+	printf("-  -\na  b\n");
 	return ;
 }
