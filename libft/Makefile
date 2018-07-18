@@ -100,7 +100,7 @@ OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILE))
 CCFLAGS = -Wall -Werror -Wextra
 CC = gcc $(CCFLAGS)
 
-all: $(NAME)
+#all: $(NAME)
 
 $(NAME): $(OBJ)
 	@ar -rc $(NAME) $(OBJ)
