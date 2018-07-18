@@ -15,6 +15,7 @@
 
 # include "../libft/includes/libft.h"
 # include <stdlib.h>
+# include <stdio.h>
 
 # define INT_MIN -2147483648
 
@@ -37,5 +38,10 @@ void	ret_ko(void);
 void	ret_ok(void);
 int		ret_error(void);
 int		ret_newl(void);
+
+
+int	pushswap_loop(t_stack *stack_a, t_stack *stack_b);
+
+void		exec_instructions(char *str, t_stack *stack_a, t_stack *stack_b);
 
 #endif

@@ -20,6 +20,7 @@ int	main(int argc, char **argv)
 	char	**num_str;
 	t_stack	*stack_a;
 	t_stack	*stack_b;
+//	t_stack	*stack_a;
 
 	if (argc == 1)
 		return (ret_newl());
@@ -30,8 +31,10 @@ int	main(int argc, char **argv)
 	stack_b = ft_stacknew();
 	if (make_stack(num_str, num_nums, stack_a) == -1)
 		return (ret_error());
-//	print_stacks(stack_a, stack_b);
-	if (instructions_loop(stack_a, stack_b) == -1)
+	print_stacks(stack_a, stack_b);
+	if (pushswap_loop(stack_a, stack_b) == -1)
 		return (ret_error());
+	printf("final stacks\n");
+	print_stacks(stack_a, stack_b);
 	return (0);
 }

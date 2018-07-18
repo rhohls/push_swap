@@ -29,6 +29,8 @@ SRC_FILE =	inits.c        \
 			returns.c      \
 			st_revrotate.c \
 			st_swap.c	   \
+			logic.c			\
+			instructions_push.c \
 
 OBJ_FILE = $(SRC_FILE:%.c=%.o)
 
@@ -36,7 +38,7 @@ SRC = $(addprefix $(SRC_PATH), $(SRC_FILE))
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILE))
 
 CHECK_MAIN = ./src_check/checker.c
-PUSHSWAP_MAIN = ./src_check/checker.c
+PUSHSWAP_MAIN = ./src_push/pusher.c
 
 #Compile
 CCFLAGS = -Wall -Werror -Wextra

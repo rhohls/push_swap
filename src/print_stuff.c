@@ -42,6 +42,6 @@ void			print_stacks(t_stack *stack_a, t_stack *stack_b)
 			ft_putstr("   ");
 		ft_putstr("\n");
 	}
-	ft_putstr("-  -\na  b\n");
+	ft_putstr("-  -\na  b\n\n");
 	return ;
 }
