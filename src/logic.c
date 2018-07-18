@@ -140,6 +140,93 @@ t_list *double_bubble(t_stack *stack_a, t_stack *stack_b)
 	return (instruction);
 }
 
+void remove_rr(t_list * instruction)
+{
+	char *str;
+	int i;
+	
+	str = (str *)instruction->content;
+	i = 0;
+	while(str[i])
+		i++;
+	i -= 2;
+	while (i > 0)
+	{
+		if (str[i] == 'r' && str[i - 1] == '\n')
+		{
+			str[i] = '\0';
+			instruction->content_size -= 1;
+		if (str[i] == 's' || str[i] == 'p')
+			break ;
+		i--;
+	}
+}
+
+void rotate_for_min(t_stack *stack_a, t_stack *stack_b, t_list *instruction)
+{
+	int ind_min_a;
+	int min;
+	int ind_min_b;
+	int i;
+	t_list *node;
+	int curr_num;
+	
+	i = 1;
+	min = INT_MAX;
+	node = stack_a->start;
+	while (node)
+	{
+		curr_num = *(int *)node->content;
+		if (curr_num < min)
+		{
+			min = curr_num;
+			ind_min_a = i;
+		}
+		i++;
+		node = node->next;
+	}
+	i = 1;
+	min = INT_MAX;
+	node = stack_b->start;
+	while (node)
+	{
+		curr_num = *(int *)node->content;
+		if (curr_num < min)
+		{
+			min = curr_num;
+			ind_min_b = i;
+		}
+		i++;
+		node = node->next;
+	}
+	
+	int min_direction_a; 
+	min_direction_a = (ind_min_a < stack_a->length / 2) ? 1 : -1;
+	
+	int min_direction_b; 
+	min_direction_b = (ind_min_b < stack_b->length / 2) ? 1 : -1;	
+	
+	int net_ind_b;
+	net_ind_b = (ind_min_b - (ind_min_a * min_direction_a));
+	/*
+	if (min_direction_b == 1 && net_ind_b < ind_min_b)
+		// go in the same way
+	else if (min_direction_b == -1 && net_ind_b > ind_min_b)
+		//also go same way
+	else
+		//go opposite
+	*/
+
+	//work out new number of moves needed -- 
+//	if ind_min_b > len_b /2
+//		res = len_b - ind_min_b
+//	else
+//		res = ind_min_b
+	
+	
+	
+}
+
 t_list *merge(t_stack *stack_a, t_stack *stack_b, t_list *instruction)
 {
 	//after removing rr from end, rotate both list until min at top
