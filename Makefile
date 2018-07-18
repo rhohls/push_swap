@@ -35,22 +35,25 @@ OBJ_FILE = $(SRC_FILE:%.c=%.o)
 SRC = $(addprefix $(SRC_PATH), $(SRC_FILE))
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILE))
 
+CHECK_MAIN = ./src_check/checker.c
+PUSHSWAP_MAIN = ./src_check/checker.c
+
 #Compile
 CCFLAGS = -Wall -Werror -Wextra
 CC = gcc $(CCFLAGS)
 
-LIBF = -L $(LIB_PATH)libft.a
+LIBF = $(LIB_PATH)libft.a
 
 #Make Commands
 all: $(CHECK) $(PUSHSWAP)
 
-$(CHECK): $(OBJ) $(INC_PATH) ./src_check/checker.c
+$(CHECK): $(OBJ) $(CHECK_MAIN)
 	@make -C./libft/
-	@$(CC) -o $@ $(LIBF) $(OBJ) ./src_check/checker.c 
+	@$(CC) -o $@ $(LIBF) $(OBJ) $(CHECK_MAIN) 
 
-$(PUSHSWAP): $(OBJ) $(INC_PATH) ./src_push/push_swap.c
+$(PUSHSWAP): $(OBJ) $(PUSHSWAP_MAIN)
 	@make -C./libft/
-	@$(CC)  -o $@ $(LIBF) $(LFT) $(OBJ) ./src_push/push_swap.c
+	@$(CC)  -o $@ $(LIBF) $(LFT) $(OBJ) $(PUSHSWAP_MAIN)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@$(CC) -I$(INC_PATH) -o $@ -c $<
