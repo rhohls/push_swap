@@ -35,13 +35,13 @@ void			print_stacks(t_stack *stack_a, t_stack *stack_b)
 			lst_a = print_it(lst_a);
 		else
 			ft_putstr(" ");
-		ft_putstr(" ");
+		ft_putstr("\t");
 		if (lst_b)
 			lst_b = print_it(lst_b);
 		else
 			ft_putstr("   ");
 		ft_putstr("\n");
 	}
-	ft_putstr("-  -\na  b\n\n");
+	ft_putstr("-\t-\na\tb\n\n");
 	return ;
 }

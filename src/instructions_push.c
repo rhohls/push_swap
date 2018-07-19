@@ -55,5 +55,22 @@ void		exec_instructions(char *str, t_stack *stack_a, t_stack *stack_b)
 	if (loop_1(str, stack_a, stack_b) != 1)
 		if (loop_2(str, stack_a, stack_b) != 1)
 			printf("this is not good!!!!\n");
-	//printf("success ex\n");
+}
+
+void		add_instruction(t_list *instruction, char *str)
+{
+	char *temp;
+
+	temp = instruction->content;
+	if (!temp)
+		instruction->content = ft_strdup(str);
+	else
+		instruction->content = ft_strjoinfree(temp, str);
+	instruction->content_size += 1;
+}
+
+void		do_instruction(t_list *instruction, char *str, t_stack *stack_a, t_stack *stack_b)
+{
+	exec_instructions(str, stack_a, stack_b);
+	add_instruction(instruction, str);
 }

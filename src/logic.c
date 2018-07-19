@@ -19,26 +19,6 @@ void	duplicate(t_stack **stack_x, t_stack **stack_y, t_stack *stack_a, t_stack *
 }
 */
 
-
-
-void add_instruction(t_list *instruction, char *str)
-{
-	char *temp;
-
-	temp = instruction->content;
-	if (!temp)
-		instruction->content = ft_strdup(str);
-	else
-		instruction->content = ft_strjoinfree(temp, str);
-	instruction->content_size += 1;
-}
-
-void do_instruction(t_list *instruction, char *str, t_stack *stack_a, t_stack *stack_b)
-{
-	exec_instructions(str, stack_a, stack_b);
-	add_instruction(instruction, str);
-}
-
 int bubble_bool(t_stack *stack_x, int direction)
 {
 	int num1;
@@ -82,8 +62,8 @@ t_list *double_bubble(t_stack *stack_a, t_stack *stack_b)
 		i++;
 	}
 
-	printf("stacks after push:\n");
-	print_stacks(stack_a, stack_b);
+//	printf("stacks after push:\n");
+//	print_stacks(stack_a, stack_b);
 
 	int bubble_loop;
 	int list_to_swap;
@@ -116,6 +96,7 @@ t_list *double_bubble(t_stack *stack_a, t_stack *stack_b)
 
 
 		//rotate list to look like normal array -- find a better way to do this (maybe cocktail swap direction)
+		//technically okay cuase remove rr at end
 		if (bubble_loop == (max_a_len - num_correct))
 		{
 			if (odd)
@@ -140,12 +121,13 @@ t_list *double_bubble(t_stack *stack_a, t_stack *stack_b)
 	return (instruction);
 }
 
-void remove_rr(t_list * instruction)
+void remove_rr(t_list * instruction, t_stack *stack_a, t_stack *stack_b)
 {
 	char *str;
+	char *temp;
 	int i;
 	
-	str = (str *)instruction->content;
+	str = (char *)(instruction->content);
 	i = 0;
 	while(str[i])
 		i++;
@@ -154,78 +136,19 @@ void remove_rr(t_list * instruction)
 	{
 		if (str[i] == 'r' && str[i - 1] == '\n')
 		{
+			temp = ft_strjoin("r", &str[i]);
+	//		ft_putstr(temp);
+			exec_instructions(temp, stack_a, stack_b);
+			free(temp);
 			str[i] = '\0';
 			instruction->content_size -= 1;
+		}
 		if (str[i] == 's' || str[i] == 'p')
 			break ;
 		i--;
 	}
 }
 
-void rotate_for_min(t_stack *stack_a, t_stack *stack_b, t_list *instruction)
-{
-	int ind_min_a;
-	int min;
-	int ind_min_b;
-	int i;
-	t_list *node;
-	int curr_num;
-	
-	i = 1;
-	min = INT_MAX;
-	node = stack_a->start;
-	while (node)
-	{
-		curr_num = *(int *)node->content;
-		if (curr_num < min)
-		{
-			min = curr_num;
-			ind_min_a = i;
-		}
-		i++;
-		node = node->next;
-	}
-	i = 1;
-	min = INT_MAX;
-	node = stack_b->start;
-	while (node)
-	{
-		curr_num = *(int *)node->content;
-		if (curr_num < min)
-		{
-			min = curr_num;
-			ind_min_b = i;
-		}
-		i++;
-		node = node->next;
-	}
-	
-	int min_direction_a; 
-	min_direction_a = (ind_min_a < stack_a->length / 2) ? 1 : -1;
-	
-	int min_direction_b; 
-	min_direction_b = (ind_min_b < stack_b->length / 2) ? 1 : -1;	
-	
-	int net_ind_b;
-	net_ind_b = (ind_min_b - (ind_min_a * min_direction_a));
-	/*
-	if (min_direction_b == 1 && net_ind_b < ind_min_b)
-		// go in the same way
-	else if (min_direction_b == -1 && net_ind_b > ind_min_b)
-		//also go same way
-	else
-		//go opposite
-	*/
-
-	//work out new number of moves needed -- 
-//	if ind_min_b > len_b /2
-//		res = len_b - ind_min_b
-//	else
-//		res = ind_min_b
-	
-	
-	
-}
 
 t_list *merge(t_stack *stack_a, t_stack *stack_b, t_list *instruction)
 {
@@ -233,35 +156,91 @@ t_list *merge(t_stack *stack_a, t_stack *stack_b, t_list *instruction)
 	// use bubble bool
 	int num1;
 	int num2;
+	int numb;
 
-	while (stack_b->start && stack_b->start->content)
+	while (stack_b->start && stack_b->start->content && stack_b->length > 1)
 	{
 		num1 = *(int *)(stack_a->start->content);
 		num2 = *(int *)(stack_b->start->content);
 
 		if (num2 < num1)
 			do_instruction(instruction, "pa\n", stack_a, stack_b);
+	//	print_stacks(stack_a, stack_b);
+		do_instruction(instruction, "ra\n", stack_a, stack_b);
+	}
+
+
+	//if curr num < b num   and next num > b num
+	// rotate and push
+	//else retotate
+	numb = *(int *)(stack_b->start->content);
+	if (stack_b->length == 1)
+	{
+		while (stack_b->length)
+		{
+			num1 = *(int *)(stack_a->start->content);
+			num2 = *(int *)(stack_a->start->next->content);
+
+			if (num1 < numb && num2 > numb )
+				break ;
+			do_instruction(instruction, "ra\n", stack_a, stack_b);
+		//	print_stacks(stack_a, stack_b);
+		}
+		do_instruction(instruction, "ra\n", stack_a, stack_b);
+		do_instruction(instruction, "pa\n", stack_a, stack_b);
+	}
+//	rot_min(instruction, stack_a, stack_b);
+
+
+	while (!bubble_bool(stack_a, 1))
+	{
+	//	print_stacks(stack_a, stack_b);
 		do_instruction(instruction, "ra\n", stack_a, stack_b);
 	}
 	do_instruction(instruction, "ra\n", stack_a, stack_b);
+	
 	return (instruction);
 }
 
 
-int	pushswap_loop(t_stack *stack_a, t_stack *stack_b)
+int	pushswap_loop(t_stack *stack_a, t_stack *stack_b, int print)
 {
 	t_list *instruction;
 
-	instruction = double_bubble(stack_a, stack_b);
+	if (print == 1)
+	{
+		instruction = double_bubble(stack_a, stack_b);
+		printf("String of commands after bubble\n");
+		ft_putstr(instruction->content);
+		printf("\nstacks after double bubble\n");
+		print_stacks(stack_a, stack_b);
 
-	//printf("Final string of commands\n");
-	//ft_putstr(a->content);
-	printf("\nstacks after double bubble\n");
-	print_stacks(stack_a, stack_b);
+		remove_rr(instruction, stack_a, stack_b);
+		printf("Commands after remove RR\n");
+		ft_putstr(instruction->content);
+		printf("\nstacks after remove rr\n");
+		print_stacks(stack_a, stack_b);
 
-	instruction = merge(stack_a, stack_b, instruction);
+		rot_min(instruction, stack_a, stack_b);
+		printf("Commands after rotate for min\n");
+		ft_putstr(instruction->content);
+		printf("\nstacks after minrot\n");
+		print_stacks(stack_a, stack_b);
 
-	printf("\nstacks after merge\n");
-	print_stacks(stack_a, stack_b);
+
+		instruction = merge(stack_a, stack_b, instruction);
+		printf("\nstacks after merge\n");
+		print_stacks(stack_a, stack_b);
+	}
+	else
+	{
+		instruction = double_bubble(stack_a, stack_b);
+		remove_rr(instruction, stack_a, stack_b);
+		rot_min(instruction, stack_a, stack_b);
+		instruction = merge(stack_a, stack_b, instruction);
+	}
+//	printf("Final Instructions\n");
+	
+	ft_putstr(instruction->content);	
 	return (1);	
 }

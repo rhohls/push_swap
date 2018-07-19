@@ -18,6 +18,7 @@
 # include <stdio.h>
 
 # define INT_MIN -2147483648
+# define INT_MAX 2147483647
 
 void	st_push(t_stack *stack_from, t_stack *stack_to);
 void	st_revrotate(t_stack *stack_x);
@@ -40,8 +41,11 @@ int		ret_error(void);
 int		ret_newl(void);
 
 
-int	pushswap_loop(t_stack *stack_a, t_stack *stack_b);
+int		pushswap_loop(t_stack *stack_a, t_stack *stack_b, int print);
 
-void		exec_instructions(char *str, t_stack *stack_a, t_stack *stack_b);
+void	exec_instructions(char *str, t_stack *stack_a, t_stack *stack_b);
+void 	add_instruction(t_list *instruction, char *str);
+void	do_instruction(t_list *instruction, char *str, t_stack *stack_a, t_stack *stack_b);
 
+t_list	*rot_min( t_list *instruction, t_stack *stack_a, t_stack *stack_b);
 #endif

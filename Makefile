@@ -31,6 +31,7 @@ SRC_FILE =	inits.c        \
 			st_swap.c	   \
 			logic.c			\
 			instructions_push.c \
+			rot_min.c 		\
 
 OBJ_FILE = $(SRC_FILE:%.c=%.o)
 
