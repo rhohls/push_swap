@@ -16,22 +16,28 @@
 
 int	main(int argc, char **argv)
 {
-	int		num_nums;
-	char	**num_str;
-	t_stack	*stack_a;
-	t_stack	*stack_b;
+//	int			num_nums;
+//	char		**num_str;
+	t_stack		*stack_a;
+	t_stack		*stack_b;
+	t_psinitvar inits;
+	t_psflags	flags;
 
 	if (argc == 1)
 		return (ret_newl());
-	num_nums = 0;
-	num_str = NULL;
-	init_nums(&num_nums, &num_str, argc, argv);
+
+	inits.argc = argc;
+	inits.argv = argv;
+	init_nums(&inits, &flags);
 	stack_a = ft_stacknew();
 	stack_b = ft_stacknew();
-	if (make_stack(num_str, num_nums, stack_a) == -1)
+
+	if (make_stack(inits.num_str, inits.num_nums, stack_a) == -1)
 		return (ret_error());
-//	print_stacks(stack_a, stack_b);
-	if (instructions_loop(stack_a, stack_b) == -1)
+	if (flags.debug == 1)
+		print_stacks(stack_a, stack_b);
+	if (instructions_loop(stack_a, stack_b, &flags) == -1)
 		return (ret_error());
+	printf("stack a %p  stack b %p\n", stack_a, stack_b);
 	return (0);
 }

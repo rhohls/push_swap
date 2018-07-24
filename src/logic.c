@@ -203,11 +203,12 @@ t_list *merge(t_stack *stack_a, t_stack *stack_b, t_list *instruction)
 }
 
 
-int	pushswap_loop(t_stack *stack_a, t_stack *stack_b, int print)
+int	pushswap_loop(t_stack *stack_a, t_stack *stack_b, t_psflags *flags)
 {
-	t_list *instruction;
+	t_list	*instruction;
+	int		fd;
 
-	if (print == 1)
+	if (flags->debug == 1)
 	{
 		instruction = double_bubble(stack_a, stack_b);
 		printf("String of commands after bubble\n");
@@ -240,7 +241,19 @@ int	pushswap_loop(t_stack *stack_a, t_stack *stack_b, int print)
 		instruction = merge(stack_a, stack_b, instruction);
 	}
 //	printf("Final Instructions\n");
+	if (flags->file == 1)
+	{
+		fd = open(flags->file_loc, O_RDWR | O_CLOEXEC | O_CREAT,S_IRWXU);
+		if (fd < 0)
+		{
+			printf("There was an error writing to file with name \"%s\" fd = %i\n", flags->file_loc, fd);
+			exit(0);
+		}
+	}
+	else
+		fd = 0;
+
+	ft_putstr_fd(instruction->content, fd);
 	
-	ft_putstr(instruction->content);	
 	return (1);	
 }

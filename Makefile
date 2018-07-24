@@ -25,7 +25,7 @@ SRC_FILE =	inits.c        \
 			st_push.c      \
 			st_rotate.c	   \
 			compare.c      \
-			instructions.c \
+			instructions_check.c \
 			returns.c      \
 			st_revrotate.c \
 			st_swap.c	   \
