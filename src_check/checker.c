@@ -18,6 +18,7 @@ int	main(int argc, char **argv)
 {
 //	int			num_nums;
 //	char		**num_str;
+	char		*temp_line;
 	t_stack		*stack_a;
 	t_stack		*stack_b;
 	t_psinitvar inits;
@@ -31,13 +32,29 @@ int	main(int argc, char **argv)
 	init_nums(&inits, &flags);
 	stack_a = ft_stacknew();
 	stack_b = ft_stacknew();
+	
+	printf("0\n");
+	get_next_line(0, &temp_line);
+	free(temp_line);
+	printf("1\n");
 
 	if (make_stack(inits.num_str, inits.num_nums, stack_a) == -1)
 		return (ret_error());
+
+	print_stacks(stack_a, stack_b);
+
+
+	get_next_line(0, &temp_line);
+	free(temp_line);
+	printf("2\n");	
+
 	if (flags.debug == 1)
 		print_stacks(stack_a, stack_b);
 	if (instructions_loop(stack_a, stack_b, &flags) == -1)
 		return (ret_error());
 	printf("stack a %p  stack b %p\n", stack_a, stack_b);
+	get_next_line(0, &temp_line);
+	free(temp_line);
+	printf("4\n");	
 	return (0);
 }
