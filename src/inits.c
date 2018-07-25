@@ -30,6 +30,7 @@ static int	isduplicate(int num, t_stack *stack_x)
 	}
 	return (0);
 }
+
 int			make_stack(char **num_str, int num_nums, t_stack *stack_a)
 {
 	int		num;

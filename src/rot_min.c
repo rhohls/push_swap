@@ -40,7 +40,9 @@ t_list *rot_min( t_list *instruction, t_stack *stack_a, t_stack *stack_b)
 	node = stack_a->start;
 
 	int min_direction_b; 
-	min_direction_b = (ind_min_b < (int)stack_b->length / 2) ? 0 : 1;	
+	min_direction_b = (ind_min_b > (int)stack_b->length / 2) ? 0 : 1;
+	// printf("ind min b %i   length/2 b  %i\n", ind_min_b, (int)stack_b->length / 2);
+	// printf("min direction --%i-- \n", min_direction_b);
 
 	if (min_direction_b)
 	{

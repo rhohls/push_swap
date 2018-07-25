@@ -12,12 +12,6 @@
 
 #include <stdio.h>
 #include "../includes/push_swap.h"
-/*
-void	duplicate(t_stack **stack_x, t_stack **stack_y, t_stack *stack_a, t_stack *stack_b)
-{
-	return ;
-}
-*/
 
 int bubble_bool(t_stack *stack_x, int direction)
 {
@@ -40,6 +34,27 @@ int bubble_bool(t_stack *stack_x, int direction)
 	else
 		return (0);
 }
+
+
+void one_bubble(t_list * instruction, t_stack *stack_a, t_stack *stack_b)
+{
+	int list_to_swap;
+	//1 is a only		2 is b only		3 is both	 0 is nothing
+
+	list_to_swap = 0;
+	if (bubble_bool(stack_b, 1) == 1)
+		list_to_swap += 2;
+	if (bubble_bool(stack_a, 1) == 1)
+		list_to_swap++;
+	//do bubble swap on each list
+	if (list_to_swap == 1)
+		do_instruction(instruction, "sa\n", stack_a, stack_b);
+	else if (list_to_swap == 2)
+		do_instruction(instruction, "sb\n", stack_a, stack_b);
+	else if (list_to_swap == 3)
+		do_instruction(instruction, "ss\n", stack_a, stack_b);
+}
+
 
 /*
 ** push half, bubble sort both, merge
@@ -66,29 +81,17 @@ t_list *double_bubble(t_stack *stack_a, t_stack *stack_b)
 //	print_stacks(stack_a, stack_b);
 
 	int bubble_loop;
-	int list_to_swap;
+
 	//todo cocktail - direction for bubble
 	bubble_loop = 0;
-	list_to_swap = 0; //1 is a only		2 is b only		3 is both	 0 is nothing
+
 
 	int num_correct = 1;
 	
 	while (1)
 	{
 		//check bubble swap
-		list_to_swap = 0;
-		if (bubble_bool(stack_b, 1) == 1)
-			list_to_swap += 2;
-		if (bubble_bool(stack_a, 1) == 1)
-			list_to_swap++;
-		//do bubble swap on each list
-		if (list_to_swap == 1)
-			do_instruction(instruction, "sa\n", stack_a, stack_b);
-		else if (list_to_swap == 2)
-			do_instruction(instruction, "sb\n", stack_a, stack_b);
-		else if (list_to_swap == 3)
-			do_instruction(instruction, "ss\n", stack_a, stack_b);
-		
+		one_bubble(instruction, stack_a, stack_b);
 		//rotate list - 
 
 		do_instruction(instruction, "rr\n", stack_a, stack_b);
@@ -150,59 +153,6 @@ void remove_rr(t_list * instruction, t_stack *stack_a, t_stack *stack_b)
 }
 
 
-t_list *merge(t_stack *stack_a, t_stack *stack_b, t_list *instruction)
-{
-	//after removing rr from end, rotate both list until min at top
-	// use bubble bool
-	int num1;
-	int num2;
-	int numb;
-
-	while (stack_b->start && stack_b->start->content && stack_b->length > 1)
-	{
-		num1 = *(int *)(stack_a->start->content);
-		num2 = *(int *)(stack_b->start->content);
-
-		if (num2 < num1)
-			do_instruction(instruction, "pa\n", stack_a, stack_b);
-	//	print_stacks(stack_a, stack_b);
-		do_instruction(instruction, "ra\n", stack_a, stack_b);
-	}
-
-
-	//if curr num < b num   and next num > b num
-	// rotate and push
-	//else retotate
-	numb = *(int *)(stack_b->start->content);
-	if (stack_b->length == 1)
-	{
-		while (stack_b->length)
-		{
-			num1 = *(int *)(stack_a->start->content);
-			num2 = *(int *)(stack_a->start->next->content);
-
-			if (num1 < numb && num2 > numb )
-				break ;
-			do_instruction(instruction, "ra\n", stack_a, stack_b);
-		//	print_stacks(stack_a, stack_b);
-		}
-		do_instruction(instruction, "ra\n", stack_a, stack_b);
-		do_instruction(instruction, "pa\n", stack_a, stack_b);
-	}
-//	rot_min(instruction, stack_a, stack_b);
-
-
-	while (!bubble_bool(stack_a, 1))
-	{
-	//	print_stacks(stack_a, stack_b);
-		do_instruction(instruction, "ra\n", stack_a, stack_b);
-	}
-	do_instruction(instruction, "ra\n", stack_a, stack_b);
-	
-	return (instruction);
-}
-
-
 int	pushswap_loop(t_stack *stack_a, t_stack *stack_b, t_psflags *flags)
 {
 	t_list	*instruction;
@@ -251,7 +201,7 @@ int	pushswap_loop(t_stack *stack_a, t_stack *stack_b, t_psflags *flags)
 		}
 	}
 	else
-		fd = 0;
+		fd = 1;
 
 	ft_putstr_fd(instruction->content, fd);
 	

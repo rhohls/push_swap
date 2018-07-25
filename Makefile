@@ -29,9 +29,10 @@ SRC_FILE =	inits.c        \
 			returns.c      \
 			st_revrotate.c \
 			st_swap.c	   \
-			logic.c			\
+			bubble.c			\
 			instructions_push.c \
 			rot_min.c 		\
+			merge.c 		\
 
 OBJ_FILE = $(SRC_FILE:%.c=%.o)
 
