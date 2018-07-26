@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 static int	isduplicate(int num, t_stack *stack_x)

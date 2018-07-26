@@ -69,5 +69,13 @@ t_list	*rot_min( t_list *instruction, t_stack *stack_a, t_stack *stack_b);
 t_list *merge(t_stack *stack_a, t_stack *stack_b, t_list *instruction);
 
 int bubble_bool(t_stack *stack_x, int direction);
+int one_bubble(t_list * instruction, t_stack *stack_a, t_stack *stack_b, int direction);
+t_list *push_half(t_stack *stack_a, t_stack *stack_b);
 
+t_list *double_bubble(t_list * instruction, t_stack *stack_a, t_stack *stack_b);
+t_list *cocktail(t_list * instruction,t_stack *stack_a, t_stack *stack_b);
+void remove_rr(t_list * instruction, t_stack *stack_a, t_stack *stack_b);
+
+
+t_list *rot_min_a( t_list *instruction, t_stack *stack_a, t_stack *stack_b);
 #endif

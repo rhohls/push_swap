@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-#include <stdio.h>
 
 static t_list	*print_it(t_list *lst_x)
 {

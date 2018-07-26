@@ -29,7 +29,9 @@ SRC_FILE =	inits.c        \
 			returns.c      \
 			st_revrotate.c \
 			st_swap.c	   \
-			bubble.c			\
+			double_bubble.c			\
+			bubble_logic.c		\
+			cocktail.c		\
 			instructions_push.c \
 			rot_min.c 		\
 			merge.c 		\

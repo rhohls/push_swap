@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-#include <stdio.h>
 
 static int	loop_1(char *line, t_stack *stack_a, t_stack *stack_b)
 {

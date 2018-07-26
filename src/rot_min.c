@@ -10,37 +10,44 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "../includes/push_swap.h"
 
 
-t_list *rot_min( t_list *instruction, t_stack *stack_a, t_stack *stack_b)
+int min_stack (t_stack *stack_x, int *ind_min_x)
 {
-//	printf("hello?\n");
 	int min;
-	int ind_min_b;
 	int i;
 	t_list *node;
 	int curr_num;
 
 	i = 0;
 	min = INT_MAX;
-	node = stack_b->start;
+	node = stack_x->start;
 	while (node)
 	{
 		curr_num = *(int *)node->content;
 		if (curr_num < min)
 		{
 			min = curr_num;
-			ind_min_b = i;
+			*ind_min_x = i;
 		}
 		i++;
 		node = node->next;
 	}
-	node = stack_a->start;
+	return (min);
+}
 
+
+t_list *rot_min(t_list *instruction, t_stack *stack_a, t_stack *stack_b)
+{
+	int min_a;
+	int ind_min_b;
 	int min_direction_b; 
+
+	min_a = min_stack(stack_a, &ind_min_b);
+	min_stack(stack_b, &ind_min_b);
 	min_direction_b = (ind_min_b > (int)stack_b->length / 2) ? 0 : 1;
+	// printf("min a %i\n",min_a);
 	// printf("ind min b %i   length/2 b  %i\n", ind_min_b, (int)stack_b->length / 2);
 	// printf("min direction --%i-- \n", min_direction_b);
 
@@ -51,8 +58,6 @@ t_list *rot_min( t_list *instruction, t_stack *stack_a, t_stack *stack_b)
 			do_instruction(instruction, "rr\n", stack_a, stack_b);
 			ind_min_b--;
 		}
-		if (stack_b->length < stack_a->length)
-			do_instruction(instruction, "ra\n", stack_a, stack_b);
 	}
 	else 
 	{
@@ -61,10 +66,8 @@ t_list *rot_min( t_list *instruction, t_stack *stack_a, t_stack *stack_b)
 			do_instruction(instruction, "rrr\n", stack_a, stack_b);
 			ind_min_b++;
 		}
-		if (stack_b->length < stack_a->length)
-			do_instruction(instruction, "rra\n", stack_a, stack_b);	
 	}
-
+	rot_min_a(instruction, stack_a, stack_b);
 	return (instruction);
 }
 
