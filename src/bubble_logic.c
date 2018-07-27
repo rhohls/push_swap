@@ -41,7 +41,7 @@ int bubble_bool(t_stack *stack_x, int direction)
 	{
 		num1 = *(int *)node->content;
 		num2 = *(int *)((node->next)->content);
-		// printf("comparing numbers |%i - %i|\n",num1,num2);
+		printf("comparing numbers |%i - %i|\n",num1,num2);
 		// printf("direction %i | 1>2? :%i: ~~ 1<2? :%i:\n ", direction, num1 > num2, num1 < num2);
 		}
 

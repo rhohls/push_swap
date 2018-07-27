@@ -12,100 +12,73 @@
 
 #include "../includes/push_swap.h"
 
-
-
-int	shake(t_cocktail *cocktail, t_stack *stack_x)
+int		shake()
 {
+	return (1);
+}
+// t_cocktail *cocktail,
+int	mix( t_list *instruction, t_stack *stack_a, t_stack *stack_b)
+{
+	t_cocktail cocktail1;
+
+	cocktail1.max_a = (int)(stack_a->length) - 1;
+	// odd = (stack_a->length % 2 == 0) ? 0 : 1;
+	
+	cocktail1.direction_a = 1;
+	cocktail1.min_a = 0;
+	cocktail1.ind_a = 0;
+	
+	cocktail1.bubble_count = 0;
+	cocktail1.a_exit = 0;
+
+	t_cocktail *cocktail = &cocktail1;
+
+
 	int bubble_count = 1;
-
-	cocktail->bubble_ret = bubble_bool(stack_x, cocktail->direction);
-	// printf("bubble return == %i \n",bubble_ret_a);
-	// printf("min %i | max %i | current %i  -- direction_a %i\n", min_a,max_a, ind_a, direction);
-	// ft_putstr("and stacks:\n");
-	// print_stacks(stack_a, stack_b);
-
 	//swap and counter
-	if (cocktail->bubble_ret == 1)
+	if (bubble_bool(stack_a, cocktail->direction_a) == 1)
+	{
 		bubble_count = 1;
+		do_instruction(instruction, "sa\n", stack_a, stack_b);
+	}
 	else 
 		bubble_count++;
 
 	// incr depend direction
 	// adj min as needed
-	if (cocktail->direction == 1)
+	if (cocktail->direction_a == 1)
 	{
-		cocktail->ind++;
-		if (cocktail->ind == cocktail->max)
+		cocktail->ind_a++;
+		if (cocktail->ind_a == cocktail->max_a)
 		{
-			cocktail->max -= bubble_count;
-			cocktail->ind--;
-			cocktail->direction *= -1;
+			cocktail->max_a--;
+			cocktail->direction_a *= -1;
 		}
 	}
 	else
 	{
-		cocktail->ind--;
-		if (cocktail->ind == cocktail->min)
+		cocktail->ind_a--;
+		if (cocktail->ind_a == cocktail->min_a)
 		{
-			cocktail->ind++;
-			cocktail->min += bubble_count;
-			cocktail->direction *= -1;
+			cocktail->ind_a++;
+			cocktail->min_a += bubble_count;
+			cocktail->direction_a *= -1;
 		}
 	}
 	// exit loop
-	if (cocktail->max <= cocktail->min)
+	if (cocktail->max_a <= cocktail->min_a)
 	{
 		printf("exit2\n");
-		cocktail->exit = 1;
+		cocktail->a_exit = 1;
 	}
-	// rotate for direction
-	if (cocktail->direction == 1)
-		return(1);
+	// rotate for direction_a
+	if (cocktail->direction_a == 1)
+		do_instruction(instruction, "ra\n", stack_a, stack_b);
 	else
-		return(0);	
+		do_instruction(instruction, "rra\n", stack_a, stack_b);
+
+	return(cocktail->a_exit);
 }
-
-void init_cocktail(t_cocktail *cocktail, t_stack *stack_x)
-{
-	cocktail->max = (int)(stack_x->length) - 1;
-	cocktail->direction = 1;
-	cocktail->min = 0;
-	cocktail->ind = 0;
-	cocktail->bubble_count = 0;
-	cocktail->exit = 0;
-}
-
-int		mix(t_list *instruction, t_stack *stack_a, t_stack *stack_b)
-{
-	t_cocktail cocktail_a;
-	// t_cocktail cocktail_b;
-	int shake_ret_a;
-
-	init_cocktail(&cocktail_a, stack_a);
-	// init_cocktail(&cocktail_a, stack_a);
-
-	int b;
-	b = stack_b->length;
-
-	while(!cocktail_a.exit)
-	{
-		shake_ret_a = shake(&cocktail_a, stack_a);
-		// printf("bubble return == %i \n",cocktail_a.bubble_ret);
-		// printf("min %i | max %i | current %i  -- direction %i\n", cocktail_a.min, cocktail_a.max, cocktail_a.ind, cocktail_a.direction);
-		// ft_putstr("and stacks:\n");
-		// print_stacks(stack_a, stack_b);
-
-		if (cocktail_a.bubble_ret)
-			do_instruction(instruction, "sa\n", stack_a, stack_b);
-		if (shake_ret_a)
-			do_instruction(instruction, "ra\n", stack_a, stack_b);
-		else
-			do_instruction(instruction, "rra\n", stack_a, stack_b);	
-	}
-
-	return (1);
-}
-
 
 //-------------------------------- //
 
@@ -113,21 +86,13 @@ t_list *cocktail(t_list * instruction,t_stack *stack_a, t_stack *stack_b)
 {
 	do_instruction(instruction, "pb\n", stack_a, stack_b);
 	do_instruction(instruction, "pb\n", stack_a, stack_b);	
-	// odd = (stack_a->length % 2 == 0) ? 0 : 1;
+	
+	int exit1 = 1;
 
-
-	t_cocktail cocktail;
-
-	cocktail.max = (int)(stack_a->length) - 1;
-	cocktail.direction = 1;
-	cocktail.min = 0;
-	cocktail.ind = 0;
-	cocktail.bubble_count = 0;
-	cocktail.exit = 0;
-
-
-	mix(instruction, stack_a, stack_b);
-
+	while(!exit1)
+	{
+		exit1 = mix(instruction, stack_a, stack_b);
+	}
 
 	return(instruction);
 }

@@ -59,7 +59,7 @@ $(CHECK): $(OBJ) $(CHECK_MAIN)
 
 $(PUSHSWAP): $(OBJ) $(PUSHSWAP_MAIN)
 	@make -C./libft/
-	@$(CC)  -o $@ $(LIBF) $(LFT) $(OBJ) $(PUSHSWAP_MAIN)
+	@$(CC)  -o $@ $(LIBF) $(OBJ) $(PUSHSWAP_MAIN)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@$(CC) -I$(INC_PATH) -o $@ -c $<

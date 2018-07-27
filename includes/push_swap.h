@@ -32,11 +32,22 @@ typedef struct	s_psflags
 
 typedef struct	s_psinitvar
 {
-	int		num_nums;
-	char	**num_str;
-	int		argc;
-	char	**argv;
+	int			num_nums;
+	char		**num_str;
+	int			argc;
+	char		**argv;
 }				t_psinitvar;
+
+typedef struct	s_cocktail
+{
+	int			min;
+	int			bubble_ret;
+	int			direction;
+	int			exit;
+	int			max;
+	int			ind;
+	int			bubble_count;
+}				t_cocktail;
 
 void	st_push(t_stack *stack_from, t_stack *stack_to);
 void	st_revrotate(t_stack *stack_x);
