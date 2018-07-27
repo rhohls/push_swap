@@ -22,11 +22,11 @@ int	pushswap_loop(t_stack *stack_a, t_stack *stack_b, t_psflags *flags)
 
 	if (flags->debug == 1)
 	{
-		// instruction = push_half(stack_a, stack_b);
-		// printf("String of commands push half\n");
-		// ft_putstr(instruction->content);
-		// printf("\nstacks after push half\n");
-		// print_stacks(stack_a, stack_b);
+		instruction = push_half(stack_a, stack_b);
+		printf("String of commands push half\n");
+		ft_putstr(instruction->content);
+		printf("\nstacks after push half\n");
+		print_stacks(stack_a, stack_b);
 
 		// instruction = double_bubble(instruction, stack_a, stack_b);
 		// printf("String of commands after bubble\n");

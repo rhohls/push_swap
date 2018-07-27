@@ -78,31 +78,55 @@ void init_cocktail(t_cocktail *cocktail, t_stack *stack_x)
 int		mix(t_list *instruction, t_stack *stack_a, t_stack *stack_b)
 {
 	t_cocktail cocktail_a;
-	// t_cocktail cocktail_b;
-	int shake_ret_a;
+	t_cocktail cocktail_b;
+	int shake_ret_a; 
+	int shake_ret_b;
 
 	init_cocktail(&cocktail_a, stack_a);
-	// init_cocktail(&cocktail_a, stack_a);
+	init_cocktail(&cocktail_b, stack_b);
 
-	int b;
-	b = stack_b->length;
 
-	while(!cocktail_a.exit)
+	while(!cocktail_a.exit && !cocktail_b.exit)
 	{
 		shake_ret_a = shake(&cocktail_a, stack_a);
+		shake_ret_b = shake(&cocktail_b, stack_b);
+		
 		// printf("bubble return == %i \n",cocktail_a.bubble_ret);
 		// printf("min %i | max %i | current %i  -- direction %i\n", cocktail_a.min, cocktail_a.max, cocktail_a.ind, cocktail_a.direction);
 		// ft_putstr("and stacks:\n");
 		// print_stacks(stack_a, stack_b);
 
-		if (cocktail_a.bubble_ret)
-			do_instruction(instruction, "sa\n", stack_a, stack_b);
-		if (shake_ret_a)
-			do_instruction(instruction, "ra\n", stack_a, stack_b);
+		if (cocktail_a.bubble_ret && cocktail_b.bubble_ret)
+			do_instruction(instruction, "ss\n", stack_a, stack_b);
 		else
-			do_instruction(instruction, "rra\n", stack_a, stack_b);	
-	}
+		{
+			if (cocktail_a.bubble_ret)
+				do_instruction(instruction, "sa\n", stack_a, stack_b);
+			if (cocktail_b.bubble_ret)
+				do_instruction(instruction, "sb\n", stack_a, stack_b);		
+		}
 
+
+		if (shake_ret_a && shake_ret_b)
+			do_instruction(instruction, "rr\n", stack_a, stack_b);
+		else if (!shake_ret_a && !shake_ret_b)
+			do_instruction(instruction, "rrr\n", stack_a, stack_b);
+		else
+		{
+			//this is bad and we should run till they both the same direction !!
+			if (shake_ret_a)
+				do_instruction(instruction, "ra\n", stack_a, stack_b);
+			else
+				do_instruction(instruction, "rra\n", stack_a, stack_b);
+
+			if (shake_ret_b)
+				do_instruction(instruction, "rb\n", stack_a, stack_b);
+			else
+				do_instruction(instruction, "rrb\n", stack_a, stack_b);
+		}
+		
+	}
+	print_stacks(stack_a, stack_b);
 	return (1);
 }
 
@@ -111,8 +135,8 @@ int		mix(t_list *instruction, t_stack *stack_a, t_stack *stack_b)
 
 t_list *cocktail(t_list * instruction,t_stack *stack_a, t_stack *stack_b)
 {
-	do_instruction(instruction, "pb\n", stack_a, stack_b);
-	do_instruction(instruction, "pb\n", stack_a, stack_b);	
+	// do_instruction(instruction, "pb\n", stack_a, stack_b);
+	// do_instruction(instruction, "pb\n", stack_a, stack_b);	
 	// odd = (stack_a->length % 2 == 0) ? 0 : 1;
 
 
