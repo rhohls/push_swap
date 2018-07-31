@@ -13,7 +13,7 @@
 #include "../includes/push_swap.h"
 #include <stdlib.h>
 
-int	pushswap_loop(t_stack *stack_a, t_stack *stack_b, t_psflags *flags)
+int	cocktail_sort(t_stack *stack_a, t_stack *stack_b, t_psflags *flags)
 {
 	t_list	*instruction;
 	int		fd;
@@ -59,7 +59,7 @@ int	pushswap_loop(t_stack *stack_a, t_stack *stack_b, t_psflags *flags)
 	}
 	else
 	{
-		//instruction = push_half(stack_a, stack_b);
+		instruction = push_half(stack_a, stack_b);
 		instruction = cocktail(instruction, stack_a, stack_b);
 		// remove_rr(instruction, stack_a, stack_b);
 		rot_min(instruction, stack_a, stack_b);
@@ -79,14 +79,14 @@ int	pushswap_loop(t_stack *stack_a, t_stack *stack_b, t_psflags *flags)
 		fd = 1;
 
 	ft_putstr_fd(instruction->content, fd);
+	if (flags->debug == 1)
+		printf("\nLength of instructions = %i", instruct_len(instruction->content));
 	
 	return (1);	
 }
 
 int	main(int argc, char **argv)
 {
-//	int		num_nums;
-//	char	**num_str;
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 	t_psinitvar inits;
@@ -104,9 +104,7 @@ int	main(int argc, char **argv)
 	if (make_stack(inits.num_str, inits.num_nums, stack_a) == -1)
 		return (ret_error());
 
-	//print_stacks(stack_a, stack_b);
-
-	if (pushswap_loop(stack_a, stack_b, &flags) == -1)
+	if (cocktail_sort(stack_a, stack_b, &flags) == -1)
 		return (ret_error());
 	if (flags.debug == 1)
 	{

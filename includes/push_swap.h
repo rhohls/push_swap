@@ -70,6 +70,7 @@ void	ret_ok(void);
 int		ret_error(void);
 int		ret_newl(void);
 
+int instruct_len(char *str);
 int	pushswap_loop(t_stack *stack_a, t_stack *stack_b, t_psflags *flags);
 
 void	exec_instructions(char *str, t_stack *stack_a, t_stack *stack_b);

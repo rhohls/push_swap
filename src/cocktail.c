@@ -55,7 +55,7 @@ int	shake(t_cocktail *cocktail, t_stack *stack_x)
 	// exit loop
 	if (cocktail->max <= cocktail->min)
 	{
-		printf("exit2\n");
+		//printf("exit2\n");
 		cocktail->exit = 1;
 	}
 	// rotate for direction
@@ -126,7 +126,7 @@ int		mix(t_list *instruction, t_stack *stack_a, t_stack *stack_b)
 		}
 		
 	}
-	print_stacks(stack_a, stack_b);
+	//print_stacks(stack_a, stack_b);
 	return (1);
 }
 
