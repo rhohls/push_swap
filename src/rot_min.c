@@ -37,6 +37,10 @@ int min_stack (t_stack *stack_x, int *ind_min_x)
 	return (min);
 }
 
+void rot_min_a_here( t_list *instruction, t_stack *stack_a, t_stack *stack_b)
+{
+	//move from merge into here
+}
 
 t_list *rot_min(t_list *instruction, t_stack *stack_a, t_stack *stack_b)
 {

@@ -12,9 +12,9 @@
 
 #include "../includes/libft.h"
 
-void ft_stackqueue(t_stack *stack, t_list *new_node)
+void	ft_stackqueue(t_stack *stack, t_list *new_node)
 {
-    t_list *temp;
+	t_list *temp;
 
 	if (stack && new_node)
 	{
@@ -23,7 +23,7 @@ void ft_stackqueue(t_stack *stack, t_list *new_node)
 		else
 		{
 			temp = stack->start;
-			while(temp->next)
+			while (temp->next)
 				temp = temp->next;
 			temp->next = new_node;
 		}

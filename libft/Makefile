@@ -94,11 +94,13 @@ SRC_FILE =	ft_stacknew.c	\
 	
 OBJ_FILE = $(SRC_FILE:%.c=%.o)
 
-#SRC = $(addprefix $(SRC_PATH), $(SRC_FILE))
+SRC = $(addprefix $(SRC_PATH), $(SRC_FILE))
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_FILE))
 
 CCFLAGS = -Wall -Werror -Wextra
 CC = gcc $(CCFLAGS)
+
+#all: $(NAME)
 
 $(NAME): $(OBJ)
 	@ar -rc $(NAME) $(OBJ)
@@ -108,12 +110,9 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@$(CC) -I$(INC_PATH) -o $@ -c $<
 	@echo Making "\x1b[35m"$@"\x1b[0m"
 
-all: $(NAME)
-
 clean:
 	@/bin/rm -f $(OBJ)
 	@echo "\x1b[31m"Removed all objects"\x1b[0m"
-
 
 fclean: clean
 	@/bin/rm -f $(NAME)

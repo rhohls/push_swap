@@ -50,11 +50,9 @@ static int	loop_2(char *line, t_stack *stack_a, t_stack *stack_b)
 	return (1);
 }
 
-int			instructions_loop(t_stack *stack_a, t_stack *stack_b, t_psflags *flags)
+static int	get_fd(t_psflags *flags)
 {
-	int		fd;
-	char	*line;
-	int		loop;
+	int fd;
 
 	if (flags->file == 1)
 	{
@@ -64,9 +62,20 @@ int			instructions_loop(t_stack *stack_a, t_stack *stack_b, t_psflags *flags)
 			printf("There was an error opening file\n");
 			exit(0);
 		}
-	}	
+	}
 	else
 		fd = 0;
+	return (fd);
+}
+
+int			instructions_loop(t_stack *stack_a, t_stack *stack_b,
+								t_psflags *flags)
+{
+	int		fd;
+	char	*line;
+	int		loop;
+
+	fd = get_fd(flags);
 	while (get_next_line(fd, &line))
 	{
 		if (loop_1(line, stack_a, stack_b) == 0)

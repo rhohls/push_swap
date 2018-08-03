@@ -30,6 +30,6 @@ int		ret_newl(void)
 
 int		ret_error(void)
 {
-	ft_putendl("ERROR");
+	ft_putendl("Error");
 	return (1);
 }

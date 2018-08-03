@@ -50,26 +50,25 @@ int			make_stack(char **num_str, int num_nums, t_stack *stack_a)
 	return (1);
 }
 
-void		adj_intflags(char** flag_str, t_psflags *flags, t_psinitvar *var)
+void		adj_intflags(char **flag_str, t_psflags *flags, t_psinitvar *var)
 {
-	while(1)
+	while (1)
 	{
 		if (var->num_str[0][0] == '-')
 		{
 			flag_str = var->num_str;
-//			printf("adjusting flags of: %c\n", flag_str[0][1]);
 			if (flag_str[0][1] == 'v')
 				flags->debug = 1;
 			else if (flag_str[0][1] == 'c')
 				flags->colour = 1;
 			else if (flag_str[0][1] == 'f')
-			{	
+			{
 				flags->file = 1;
 				flags->file_loc = flag_str[1];
 				var->num_nums--;
-				var->num_str++;		
+				var->num_str++;
 			}
-			else 
+			else
 				continue ;
 			var->num_nums--;
 			var->num_str++;
@@ -88,12 +87,10 @@ void		init_flags(t_psinitvar *var, t_psflags *flags)
 	flags->file = 0;
 	flags->colour = 0;
 	flags->file_loc = NULL;
-	
 	if (var->num_str[i][0] == '-')
 	{
 		adj_intflags(var->num_str, flags, var);
 	}
-
 }
 
 void		init_nums(t_psinitvar *var, t_psflags *flags)
@@ -102,7 +99,6 @@ void		init_nums(t_psinitvar *var, t_psflags *flags)
 	{
 		var->num_str = ft_strsplit(var->argv[1], ' ');
 		var->num_nums = ft_strcount(var->num_str);
-		//printf("nustr: %p and numnum %p\n", var->num_str, var->num_nums);
 	}
 	else
 	{

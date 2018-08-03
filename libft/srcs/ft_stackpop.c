@@ -12,18 +12,18 @@
 
 #include "../includes/libft.h"
 
-t_list *ft_stackpop(t_stack *stack)
+t_list	*ft_stackpop(t_stack *stack)
 {
-    t_list *popped;
+	t_list *popped;
 
-    if (stack && stack->start)
-    {
-        popped = stack->start;
-        stack->start = stack->start->next;
-        stack->length--;
+	if (stack && stack->start)
+	{
+		popped = stack->start;
+		stack->start = stack->start->next;
+		stack->length--;
 		popped->next = NULL;
-    }
-    else
-        popped = NULL;
-    return (popped);
+	}
+	else
+		popped = NULL;
+	return (popped);
 }

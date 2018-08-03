@@ -32,7 +32,7 @@ static int	atoi_space(const char *str, int *neg)
 	return (i);
 }
 
-static int 	atoi_return(int neg, int long ret)
+static int	atoi_return(int neg, int long ret)
 {
 	if (neg)
 		ret *= (-1);
@@ -43,10 +43,10 @@ static int 	atoi_return(int neg, int long ret)
 
 int			ft_atoi_long(const char *str)
 {
-	int long ret;
-	int i;
-	int neg;
-	int num_dig;
+	int long	ret;
+	int			i;
+	int			neg;
+	int			num_dig;
 
 	ret = 0;
 	neg = 0;

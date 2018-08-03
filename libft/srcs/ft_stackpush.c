@@ -12,12 +12,12 @@
 
 #include "../includes/libft.h"
 
-void ft_stackpush(t_stack *stack, t_list *new_node)
+void	ft_stackpush(t_stack *stack, t_list *new_node)
 {
-    if (stack && new_node)
-    {
-        new_node->next = stack->start;
-        stack->start = new_node;
-        stack->length++;
-    }
+	if (stack && new_node)
+	{
+		new_node->next = stack->start;
+		stack->start = new_node;
+		stack->length++;
+	}
 }

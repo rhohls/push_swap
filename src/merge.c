@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   logic.c                                            :+:      :+:    :+:   */
+/*   merge.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhohls <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,14 +12,16 @@
 
 #include "../includes/push_swap.h"
 
+
+//move this V into the rot_min file
 t_list *rot_min_a( t_list *instruction, t_stack *stack_a, t_stack *stack_b)
 {
 //	printf("hello?\n");
-	int min;
-	int ind_min_a;
-	int i;
-	t_list *node;
-	int curr_num;
+	int		min;
+	int		ind_min_a;
+	int		i;
+	t_list	*node;
+	int		curr_num;
 
 	i = 0;
 	min = INT_MAX;
@@ -58,32 +60,21 @@ t_list *rot_min_a( t_list *instruction, t_stack *stack_a, t_stack *stack_b)
 			ind_min_a++;
 		}
 	}
-
 	return (instruction);
 }
 
-t_list *merge(t_stack *stack_a, t_stack *stack_b, t_list *instruction)
+t_list	*merge(t_stack *stack_a, t_stack *stack_b, t_list *instruction)
 {
-	// char str[] = "~~~\nmerging now\n~~~\n";
-	// char *temp;
-
-	// temp = instruction->content;
-	// if (!temp)
-	// 	instruction->content = ft_strdup(str);
-	// else
-	// 	instruction->content = ft_strjoinfree(temp, str);
-
 	int numa;
 	int numa2;
 	int numb;
-	// printf("start merge\n");
+
 	while (stack_b->start && stack_b->start->content)// && stack_b->length > 1)
 	{
 		// print_stacks(stack_a, stack_b);
 		numa = *(int *)(stack_a->start->content);
 		numa2 = *(int *)(stack_a->start->next->content);
 		numb = *(int *)(stack_b->start->content);
-
 		if (numb < numa)
 			do_instruction(instruction, "pa\n", stack_a, stack_b);
 		else if (numa2 < numa)
@@ -94,63 +85,15 @@ t_list *merge(t_stack *stack_a, t_stack *stack_b, t_list *instruction)
 		else
 			do_instruction(instruction, "ra\n", stack_a, stack_b);
 	}
-	//printf("123\n");
 	rot_min_a(instruction, stack_a, stack_b);
 	return (instruction);	
 }
 
+	// char str[] = "~~~\nmerging now\n~~~\n";
+	// char *temp;
 
-
-/*
-t_list *merge(t_stack *stack_a, t_stack *stack_b, t_list *instruction)
-{
-	//after removing rr from end, rotate both list until min at top
-	// use bubble bool
-	int num1;
-	int num2;
-	int numb;
-
-	while (stack_b->start && stack_b->start->content && stack_b->length > 1)
-	{
-		num1 = *(int *)(stack_a->start->content);
-		num2 = *(int *)(stack_b->start->content);
-
-		if (num2 < num1)
-			do_instruction(instruction, "pa\n", stack_a, stack_b);
-	//	print_stacks(stack_a, stack_b);
-		do_instruction(instruction, "ra\n", stack_a, stack_b);
-	}
-
-
-	//if curr num < b num   and next num > b num
-	// rotate and push
-	//else retotate
-	numb = *(int *)(stack_b->start->content);
-	if (stack_b->length == 1)
-	{
-		while (stack_b->length)
-		{
-			num1 = *(int *)(stack_a->start->content);
-			num2 = *(int *)(stack_a->start->next->content);
-
-			if (num1 < numb && num2 > numb )
-				break ;
-			do_instruction(instruction, "ra\n", stack_a, stack_b);
-		//	print_stacks(stack_a, stack_b);
-		}
-		do_instruction(instruction, "ra\n", stack_a, stack_b);
-		do_instruction(instruction, "pa\n", stack_a, stack_b);
-	}
-//	rot_min(instruction, stack_a, stack_b);
-
-
-	while (!bubble_bool(stack_a, 1))
-	{
-	//	print_stacks(stack_a, stack_b);
-		do_instruction(instruction, "ra\n", stack_a, stack_b);
-	}
-	do_instruction(instruction, "ra\n", stack_a, stack_b);
-	
-	return (instruction);
-}
-*/
+	// temp = instruction->content;
+	// if (!temp)
+	// 	instruction->content = ft_strdup(str);
+	// else
+	// 	instruction->content = ft_strjoinfree(temp, str);

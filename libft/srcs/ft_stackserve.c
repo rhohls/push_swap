@@ -12,11 +12,9 @@
 
 #include "../includes/libft.h"
 
-#include <stdio.h>
-
-t_list *ft_stackserve(t_stack *stack)
+t_list	*ft_stackserve(t_stack *stack)
 {
-    t_list *node;
+	t_list *node;
 	t_list *previous;
 
 	previous = NULL;
@@ -32,38 +30,9 @@ t_list *ft_stackserve(t_stack *stack)
 			previous->next = NULL;
 		stack->length--;
 		if (stack->length == 0)
-			stack->start = NULL;	
-	}
-	else 
-		return (NULL);
-	return (node);
-}
-
-/*
-t_list *ft_stackserve(t_stack *stack)
-{
-    t_list *node;
-	t_list *previous;
-	
-	previous = NULL;
-	node = stack->start;
-	if (stack && stack->length > 0)
-	{
-		while (node && node->next)
-		{
-			node = node->next;
-			if (node->next)
-				previous = node;
-		}
-		if (previous)
-			previous->next = NULL;
-		node->next = NULL;
-		stack->length--;
-		if (stack->length == 0)
 			stack->start = NULL;
 	}
 	else
-		node = NULL;
+		return (NULL);
 	return (node);
 }
-*/

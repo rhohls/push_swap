@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_strcount(char **str)
+int	ft_strcount(char **str)
 {
 	int		i;
 
 	i = 0;
 	while (str[i])
 		i++;
-	return (i);	
+	return (i);
 }

@@ -10,7 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void	duplicate(t_stack *stack_x, t_stack *stack_y, t_stack *stack_a, t_stack *stack_b)
+#include "../includes/push_swap.h"
+
+void	duplicate(t_stack *stack_x, t_stack *stack_y,
+					t_stack *stack_a, t_stack *stack_b)
 {
-	
+	return ;
 }
