@@ -13,7 +13,7 @@
 #include "../includes/push_swap.h"
 
 
-
+// return is direction to rotate
 int	shake(t_cocktail *cocktail, t_stack *stack_x)
 {
 	int bubble_count = 1;
@@ -24,7 +24,7 @@ int	shake(t_cocktail *cocktail, t_stack *stack_x)
 	// ft_putstr("and stacks:\n");
 	// print_stacks(stack_a, stack_b);
 
-	//swap and counter
+	//swap and incr counter
 	if (cocktail->bubble_ret == 1)
 		bubble_count = 1;
 	else 
@@ -75,6 +75,33 @@ void init_cocktail(t_cocktail *cocktail, t_stack *stack_x)
 	cocktail->exit = 0;
 }
 
+/*
+void cock_swap(int type, t_list *instruction, t_stack *stack_a, t_stack *stack_b)
+{
+
+}
+*/
+
+
+/*
+** 0 - rra
+** 1 - ra
+** 2 - rrb
+** 3 - rb
+*/
+static void cocktail_rotate(int cocktail_and_dir, t_list *instruction, t_stack *stack_a, t_stack *stack_b)
+{
+	if (cocktail_and_dir == 1)
+		do_instruction(instruction, "ra\n", stack_a, stack_b);
+	else if (cocktail_and_dir == 0)
+		do_instruction(instruction, "rra\n", stack_a, stack_b);
+
+	else if (cocktail_and_dir == 3)
+		do_instruction(instruction, "rb\n", stack_a, stack_b);
+	else if (cocktail_and_dir == 2)
+		do_instruction(instruction, "rrb\n", stack_a, stack_b);
+}
+
 int		mix(t_list *instruction, t_stack *stack_a, t_stack *stack_b)
 {
 	t_cocktail cocktail_a;
@@ -95,35 +122,40 @@ int		mix(t_list *instruction, t_stack *stack_a, t_stack *stack_b)
 		// printf("min %i | max %i | current %i  -- direction %i\n", cocktail_a.min, cocktail_a.max, cocktail_a.ind, cocktail_a.direction);
 		// ft_putstr("and stacks:\n");
 		// print_stacks(stack_a, stack_b);
+		one_bubble(instruction, stack_a, stack_b, 1);
 
-		if (cocktail_a.bubble_ret && cocktail_b.bubble_ret)
-			do_instruction(instruction, "ss\n", stack_a, stack_b);
-		else
+		dprintf(2, "shke a %i, shake b %i \n", shake_ret_a, shake_ret_b);
+		if (shake_ret_a != shake_ret_b)
 		{
-			if (cocktail_a.bubble_ret)
-				do_instruction(instruction, "sa\n", stack_a, stack_b);
-			if (cocktail_b.bubble_ret)
-				do_instruction(instruction, "sb\n", stack_a, stack_b);		
+			dprintf(2, "single shake\n");
+			if ((cocktail_a.max - cocktail_a.min) > (cocktail_b.max - cocktail_b.min))
+			{
+				cocktail_rotate(shake_ret_a, instruction, stack_a, stack_b);
+				while (shake_ret_a != shake_ret_b)
+				{
+					shake_ret_a = shake(&cocktail_a, stack_a);
+					if (shake_ret_a == shake_ret_b)
+						break ;
+					cocktail_rotate(shake_ret_a, instruction, stack_a, stack_b);
+				}
+			}
+			else 
+			{
+				cocktail_rotate(shake_ret_b + 2, instruction, stack_a, stack_b);
+				while (shake_ret_a != shake_ret_b)
+				{
+					shake_ret_b = shake(&cocktail_b, stack_b);
+					if (shake_ret_a == shake_ret_b)
+						break ;
+					cocktail_rotate(shake_ret_b + 2, instruction, stack_a, stack_b);
+				}
+			}
 		}
-
 
 		if (shake_ret_a && shake_ret_b)
 			do_instruction(instruction, "rr\n", stack_a, stack_b);
 		else if (!shake_ret_a && !shake_ret_b)
 			do_instruction(instruction, "rrr\n", stack_a, stack_b);
-		else
-		{
-			//this is bad and we should run till they both the same direction !!
-			if (shake_ret_a)
-				do_instruction(instruction, "ra\n", stack_a, stack_b);
-			else
-				do_instruction(instruction, "rra\n", stack_a, stack_b);
-
-			if (shake_ret_b)
-				do_instruction(instruction, "rb\n", stack_a, stack_b);
-			else
-				do_instruction(instruction, "rrb\n", stack_a, stack_b);
-		}
 		
 	}
 	//print_stacks(stack_a, stack_b);
@@ -139,145 +171,9 @@ t_list *cocktail(t_list * instruction,t_stack *stack_a, t_stack *stack_b)
 	// do_instruction(instruction, "pb\n", stack_a, stack_b);	
 	// odd = (stack_a->length % 2 == 0) ? 0 : 1;
 
-
-	t_cocktail cocktail;
-
-	cocktail.max = (int)(stack_a->length) - 1;
-	cocktail.direction = 1;
-	cocktail.min = 0;
-	cocktail.ind = 0;
-	cocktail.bubble_count = 0;
-	cocktail.exit = 0;
-
-
 	mix(instruction, stack_a, stack_b);
 
 
 	return(instruction);
 }
 
-/*
-t_list *cocktail(t_list * instruction,t_stack *stack_a, t_stack *stack_b)
-{
-	do_instruction(instruction, "pb\n", stack_a, stack_b);
-	do_instruction(instruction, "pb\n", stack_a, stack_b);	
-	int ind_a;
-	int ind_b;
-	int max_a;
-	int max_b;
-	int odd;
-
-	int min_a;
-//	int min_b;
-
-	max_a = (int)(stack_a->length) - 1;
-	max_b = (int)(stack_b->length);
-	odd = (stack_a->length % 2 == 0) ? 0 : 1;
-
-//	int swap_a;
-//	int swap_b;
-	int direction;
-	
-	direction = 1;
-	min_a = 0;
-	min_a = 0;
-	ind_a = 0;
-	ind_b = 0;
-	
-	int bubble_ret_a;	//1 is a only		2 is b only		3 is both		0 is nothing
-
-
-	// printf("stacks for starting\n");
-	// print_stacks(stack_a, stack_b);
-
-	int first = 1;
-
-	while(1)
-	{
-		// ft_putstr("Stacks before swap:\n");
-		// print_stacks(stack_a, stack_b);
-
-		bubble_ret_a = bubble_bool(stack_a, direction);
-		if (bubble_ret_a == 1)
-			do_instruction(instruction, "sa\n", stack_a, stack_b);
-
-		printf("bubble return == %i \n",bubble_ret_a);
-		printf("min %i | max %i | current %i  -- direction %i\n", min_a,max_a, ind_a, direction);
-		ft_putstr("and stacks:\n");
-		print_stacks(stack_a, stack_b);
-
-		if (direction == 1)
-		{
-			// do_instruction(instruction, "ra\n", stack_a, stack_b);
-			if (bubble_ret_a == 0)
-			{
-				// if (!first && ind_a == min_a)
-				// 	min_a++;
-				ind_a++;
-			}
-			else if (bubble_ret_a == 1)
-			{
-				ind_a++;		
-			}
-			
-			if (ind_a == max_a)
-			{
-				max_a--;
-				direction *= -1;
-				first = 0;
-			}
-		}
-		if (direction == -1)
-		{
-			// do_instruction(instruction, "rra\n", stack_a, stack_b);
-			if (bubble_ret_a == 0)
-			{	
-				// if (ind_a == max_a)	
-				// 	max_a--;
-				ind_a--;			
-			}
-			else if (bubble_ret_a == 1)
-			{
-				ind_a--;		
-			}
-
-			if (ind_a == min_a)
-			{
-				ind_a++;
-				min_a++;
-				direction *= -1;
-			}
-		}
-		// printf("min %i | max %i | current %i  -- direction %i\n", min_a,max_a, ind_a, direction);
-		//break checks
-		if (ind_a > max_a || ind_a < min_a)
-		{
-			printf("exit 1  \ncondition 1: %i | condition 2: %i\n",ind_a > max_a,ind_a < min_a);
-			break ; 
-		}
-		else if (max_a == min_a)
-		{
-			printf("exit2\n");
-			break;
-		}
-		//swap direction
-		// if (ind_a == max_a || ind_a == min_a)
-		// {
-		// 	printf("min %i | max %i | current %i  -- direction %i\n", min_a,max_a, ind_a, direction);
-		// 	if (direction == -1)
-		// 		ind_a--;
-		// //	do_instruction(instruction, "rra\n", stack_a, stack_b);
-		// 	direction *= -1;
-		// }
-		if (direction == 1)
-		{
-			do_instruction(instruction, "ra\n", stack_a, stack_b);
-		}
-		else
-		{
-			do_instruction(instruction, "rra\n", stack_a, stack_b);
-		}
-	}
-
-	return(instruction);
-}*/

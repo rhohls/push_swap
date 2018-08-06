@@ -51,7 +51,9 @@ int		bubble_bool(t_stack *stack_x, int direction)
 		return (0);
 }
 
-//1 is a only		2 is b only		3 is both	 0 is nothing
+/*
+** 1 is a only		2 is b only		3 is both	 0 is nothing
+*/
 
 int		one_bubble(t_list *instruction, t_stack *stack_a,
 					t_stack *stack_b, int direction)
