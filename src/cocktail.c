@@ -112,22 +112,27 @@ int		mix(t_list *instruction, t_stack *stack_a, t_stack *stack_b)
 	init_cocktail(&cocktail_a, stack_a);
 	init_cocktail(&cocktail_b, stack_b);
 
-
 	while(!cocktail_a.exit && !cocktail_b.exit)
 	{
 		shake_ret_a = shake(&cocktail_a, stack_a);
 		shake_ret_b = shake(&cocktail_b, stack_b);
 		
-		// printf("bubble return == %i \n",cocktail_a.bubble_ret);
+		// printf("bubble return a == %i \n",cocktail_a.bubble_ret);
 		// printf("min %i | max %i | current %i  -- direction %i\n", cocktail_a.min, cocktail_a.max, cocktail_a.ind, cocktail_a.direction);
+		// // ft_putstr("and stacks:\n");
+		// // print_stacks(stack_a, stack_b);
+
+		// printf("bubble return b == %i \n",cocktail_b.bubble_ret);
+		// printf("min %i | max %i | current %i  -- direction %i\n", cocktail_b.min, cocktail_b.max, cocktail_b.ind, cocktail_b.direction);
 		// ft_putstr("and stacks:\n");
 		// print_stacks(stack_a, stack_b);
+
 		one_bubble(instruction, stack_a, stack_b, 1);
 
-		dprintf(2, "shke a %i, shake b %i \n", shake_ret_a, shake_ret_b);
+		// dprintf(2, "shake a %i, shake b %i \n", shake_ret_a, shake_ret_b);
 		if (shake_ret_a != shake_ret_b)
 		{
-			dprintf(2, "single shake\n");
+			// dprintf(2, "single shake\n");
 			if ((cocktail_a.max - cocktail_a.min) > (cocktail_b.max - cocktail_b.min))
 			{
 				cocktail_rotate(shake_ret_a, instruction, stack_a, stack_b);
