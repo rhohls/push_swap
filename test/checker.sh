@@ -1,0 +1,1 @@
+../checker $1 < pusher.txt > checker.txt

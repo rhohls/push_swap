@@ -103,7 +103,13 @@ int	main(int argc, char **argv)
 	stack_b = ft_stacknew();
 	if (make_stack(inits.num_str, inits.num_nums, stack_a) == -1)
 		return (ret_error());
-
+	
+	if (flags.debug == 1)
+	{
+		printf("\n Starting stacks\n");
+		print_stacks(stack_a, stack_b);
+	}
+	
 	if (cocktail_sort(stack_a, stack_b, &flags) == -1)
 		return (ret_error());
 	if (flags.debug == 1)
