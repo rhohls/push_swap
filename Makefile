@@ -36,6 +36,7 @@ SRC_FILE =	inits.c        \
 			rot_min.c 		\
 			merge.c 		\
 			inst_len.c		\
+			mini_insert.c	\
 
 OBJ_FILE = $(SRC_FILE:%.c=%.o)
 

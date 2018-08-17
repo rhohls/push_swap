@@ -44,3 +44,23 @@ void			print_stacks(t_stack *stack_a, t_stack *stack_b)
 	ft_putstr("-\t-\na\tb\n\n");
 	return ;
 }
+
+void			print_instructions(t_psflags *flags, t_list *instruction)
+{
+	int		fd;
+	if (flags->file == 1)
+	{
+		fd = open(flags->file_loc, O_RDWR | O_CLOEXEC | O_CREAT,S_IRWXU);
+		if (fd < 0)
+		{
+			printf("There was an error writing to file with name \"%s\" fd = %i\n", flags->file_loc, fd);
+			exit(0);
+		}
+	}
+	else
+		fd = 1;
+
+	ft_putstr_fd(instruction->content, fd);
+	if (flags->debug == 1)
+		printf("\nLength of instructions = %i", instruct_len(instruction->content));
+}

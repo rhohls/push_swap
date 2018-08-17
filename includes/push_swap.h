@@ -37,6 +37,7 @@ void	init_nums(t_psinitvar *var, t_psflags *flags);
 void	print_stacks(t_stack *stack_a, t_stack *stack_b);
 void	compare(t_stack *stack_a, t_stack *stack_b);
 int		instructions_loop(t_stack *stack_a, t_stack *stack_b, t_psflags *flags);
+void	print_instructions(t_psflags *flags, t_list *instruction);
 
 void	ret_ko(void);
 void	ret_ok(void);
@@ -64,4 +65,8 @@ t_list	*cocktail(t_list *instruction, t_stack *stack_a, t_stack *stack_b);
 void	remove_rr(t_list *instruction, t_stack *stack_a, t_stack *stack_b);
 
 t_list	*rot_min_a(t_list *instruction, t_stack *stack_a, t_stack *stack_b);
+
+
+int	mini_insert(t_stack *stack_a, t_stack *stack_b, t_psflags *flags);
+
 #endif

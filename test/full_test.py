@@ -44,7 +44,7 @@ def shell_exe(array_string):
         for line in lines:
             print(line, end='')
 
-length = 100
+length = 5
 array = random.sample(range(0, length), length)
 array_str = ' '.join(map(str, array))
 

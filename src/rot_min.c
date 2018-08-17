@@ -46,14 +46,14 @@ int min_stack (t_stack *stack_x, int *ind_min_x)
 	min_a = min_stack(stack_a, &ind_min_a);
 	min_direction_a = (ind_min_a > (int)stack_a->length / 2) ? 0 : 1;
 
-	printf("direction a: %d  ind_a %d\n", min_direction_a, ind_min_a);
+	// printf("direction a: %d  ind_a %d\n", min_direction_a, ind_min_a);
 
 	if (min_direction_a)
 	{
 		while (ind_min_a != 0)
 		{
 			do_instruction(instruction, "ra\n", stack_a, stack_b);
-			printf("doing - ra\n");
+			// printf("doing - ra\n");
 			ind_min_a--;
 		}
 	}
@@ -62,7 +62,7 @@ int min_stack (t_stack *stack_x, int *ind_min_x)
 		while (ind_min_a != (int)stack_a->length)
 		{
 			do_instruction(instruction, "rra\n", stack_a, stack_b);
-			printf("doing - rra\n");
+			// printf("doing - rra\n");
 			ind_min_a++;
 		}
 	}
@@ -98,12 +98,12 @@ t_list *rot_min(t_list *instruction, t_stack *stack_a, t_stack *stack_b)
 			ind_min_b++;
 		}
 	}
-	printf("\nStacks before min a\n");
-	print_stacks(stack_a, stack_b);
+	// printf("\nStacks before min a\n");
+	// print_stacks(stack_a, stack_b);
 
 	rot_min_a(instruction, stack_a, stack_b);
 
-	printf("\nStacks before after a\n");
-	print_stacks(stack_a, stack_b);
+	// printf("\nStacks before after a\n");
+	// print_stacks(stack_a, stack_b);
 	return (instruction);
 }

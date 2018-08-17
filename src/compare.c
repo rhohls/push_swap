@@ -32,3 +32,4 @@ void	compare(t_stack *stack_a, t_stack *stack_b)
 	}
 	return (ret_ok());
 }
+

@@ -76,14 +76,6 @@ void init_cocktail(t_cocktail *cocktail, t_stack *stack_x)
 }
 
 /*
-void cock_swap(int type, t_list *instruction, t_stack *stack_a, t_stack *stack_b)
-{
-
-}
-*/
-
-
-/*
 ** 0 - rra
 ** 1 - ra
 ** 2 - rrb
@@ -112,18 +104,22 @@ int		mix(t_list *instruction, t_stack *stack_a, t_stack *stack_b)
 	init_cocktail(&cocktail_a, stack_a);
 	init_cocktail(&cocktail_b, stack_b);
 
+	printf("max a %u   -  len a %lu   -   \n", cocktail_a.max, stack_a->length);
+	printf("max b %u   -  len b %lu   -   \n\n", cocktail_b.max, stack_b->length);
+
+
 	while(!cocktail_a.exit && !cocktail_b.exit)
 	{
 		shake_ret_a = shake(&cocktail_a, stack_a);
 		shake_ret_b = shake(&cocktail_b, stack_b);
 		
-		// printf("bubble return a == %i \n",cocktail_a.bubble_ret);
-		// printf("min %i | max %i | current %i  -- direction %i\n", cocktail_a.min, cocktail_a.max, cocktail_a.ind, cocktail_a.direction);
-		// // ft_putstr("and stacks:\n");
-		// // print_stacks(stack_a, stack_b);
+		printf("bubble return a == %i \n",cocktail_a.bubble_ret);
+		printf("min %i | max %i | current %i  -- direction %i\n", cocktail_a.min, cocktail_a.max, cocktail_a.ind, cocktail_a.direction);
+		// ft_putstr("and stacks:\n");
+		// print_stacks(stack_a, stack_b);
 
-		// printf("bubble return b == %i \n",cocktail_b.bubble_ret);
-		// printf("min %i | max %i | current %i  -- direction %i\n", cocktail_b.min, cocktail_b.max, cocktail_b.ind, cocktail_b.direction);
+		printf("bubble return b == %i \n",cocktail_b.bubble_ret);
+		printf("min %i | max %i | current %i  -- direction %i\n", cocktail_b.min, cocktail_b.max, cocktail_b.ind, cocktail_b.direction);
 		// ft_putstr("and stacks:\n");
 		// print_stacks(stack_a, stack_b);
 
@@ -182,3 +178,75 @@ t_list *cocktail(t_list * instruction,t_stack *stack_a, t_stack *stack_b)
 	return(instruction);
 }
 
+int	cocktail_sort(t_stack *stack_a, t_stack *stack_b, t_psflags *flags)
+{
+	t_list	*instruction;
+	int		fd;
+
+	instruction = ft_lstnew(NULL, 0);
+
+	if (flags->debug == 1)
+	{
+		instruction = push_half(stack_a, stack_b);
+		printf("String of commands push half\n");
+		ft_putstr(instruction->content);
+		printf("\nstacks after push half\n");
+		print_stacks(stack_a, stack_b);
+
+		// instruction = cocktail(instruction, stack_a, stack_b);
+		// printf("String of commands after cocktail\n");
+		// ft_putstr(instruction->content);
+		// printf("\nstacks after double cocktail\n");
+		// print_stacks(stack_a, stack_b);
+
+		instruction = double_bubble(instruction, stack_a, stack_b);
+		printf("String of commands after bubble\n");
+		ft_putstr(instruction->content);
+		printf("\nstacks after double bubble\n");
+		print_stacks(stack_a, stack_b);
+		
+		remove_rr(instruction, stack_a, stack_b);
+		printf("Commands after remove RR\n");
+		ft_putstr(instruction->content);
+		printf("\nstacks after remove rr\n");
+		print_stacks(stack_a, stack_b);
+
+		rot_min(instruction, stack_a, stack_b);
+		printf("Commands after rotate for min\n");
+		ft_putstr(instruction->content);
+		printf("\nstacks after minrot\n");
+		print_stacks(stack_a, stack_b);
+
+
+		instruction = merge(stack_a, stack_b, instruction);
+		printf("\nstacks after merge\n");
+		print_stacks(stack_a, stack_b);
+	}
+	else
+	{
+		instruction = push_half(stack_a, stack_b);
+		// instruction = cocktail(instruction, stack_a, stack_b);
+		instruction = double_bubble(instruction, stack_a, stack_b);
+		remove_rr(instruction, stack_a, stack_b);
+		rot_min(instruction, stack_a, stack_b);
+		instruction = merge(stack_a, stack_b, instruction);
+	}
+//	printf("Final Instructions\n");
+	if (flags->file == 1)
+	{
+		fd = open(flags->file_loc, O_RDWR | O_CLOEXEC | O_CREAT,S_IRWXU);
+		if (fd < 0)
+		{
+			printf("There was an error writing to file with name \"%s\" fd = %i\n", flags->file_loc, fd);
+			exit(0);
+		}
+	}
+	else
+		fd = 1;
+
+	ft_putstr_fd(instruction->content, fd);
+	if (flags->debug == 1)
+		printf("\nLength of instructions = %i", instruct_len(instruction->content));
+	
+	return (1);	
+}
