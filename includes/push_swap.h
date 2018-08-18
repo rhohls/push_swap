@@ -68,5 +68,6 @@ t_list	*rot_min_a(t_list *instruction, t_stack *stack_a, t_stack *stack_b);
 
 
 int	mini_insert(t_stack *stack_a, t_stack *stack_b, t_psflags *flags);
+int		stack_sorted_anyorder(t_stack *stack_a);
 
 #endif

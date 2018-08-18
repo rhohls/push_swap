@@ -40,4 +40,34 @@ typedef struct	s_cocktail
 	int			bubble_count;
 }				t_cocktail;
 
+/*
+** Case details:
+** 1. rr + ra
+** 2. rr + rb
+** 3. rrr + rra
+** 4. rrr + rrb
+** 5. ra + rrb
+** 6. rra + rb
+*/
+
+typedef struct	s_insert
+{
+	int			ind_a;
+	int			ra;
+	int			rra;
+	int			ind_b;
+	int			rb;
+	int			rrb;
+	int			case_num;
+	int			net_moves;
+}				t_insert;
+
+typedef struct	s_psvar
+{
+	t_stack		*stack_a;
+	t_stack		*stack_b;
+	t_stack		*instructions;
+	t_stack		*inserts;	
+}				t_psvar;
+
 #endif

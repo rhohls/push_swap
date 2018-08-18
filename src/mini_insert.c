@@ -44,19 +44,6 @@ int		stack_sorted_anyorder(t_stack *stack_a)
 }
 
 
-t_list	*insert_loop(t_stack *stack_a, t_stack *stack_b, t_list *instruction)
-{
-
-	printf("sort res A: %d\n", stack_sorted_anyorder(stack_a));
-	rot_min_a(instruction, stack_a, stack_b);
-	while (!stack_sorted_anyorder(stack_a))
-	{
-		
-	}
-	do_instruction(instruction, "pa\n", stack_a, stack_b);
-	return (instruction);
-}
-
 
 
 int	mini_insert(t_stack *stack_a, t_stack *stack_b, t_psflags *flags)
