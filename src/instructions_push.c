@@ -54,7 +54,7 @@ void		exec_instructions(char *str, t_stack *stack_a, t_stack *stack_b)
 {
 	if (loop_1(str, stack_a, stack_b) != 1)
 		if (loop_2(str, stack_a, stack_b) != 1)
-			printf("Error: bad instruction!!!!\ngot instruction |%s|\n", str);
+			printf("Error: Bad instruction\ngot instruction |%s|\n", str);
 }
 
 void		add_instruction(t_list *instruction, char *str)

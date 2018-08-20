@@ -39,17 +39,20 @@ int	main(int argc, char **argv)
 		printf("\n Starting stacks\n");
 		print_stacks(stack_a, stack_b);
 	}
-	// char *line;
+	char *line;
 	// get_next_line(0,&line);
 	// free(line);
 	if (mini_insert(stack_a, stack_b, &flags) == -1)
 		return (ret_error());
+	get_next_line(0,&line);
+	free(line);
+	printf("6\n");
 	if (flags.debug == 1)
 	{
 		printf("\nfinal stacks\n");
 		print_stacks(stack_a, stack_b);
 	}
-	// get_next_line(0,&line);
-	// free(line);
+	get_next_line(0,&line);
+	free(line);
 	return (0);
 }

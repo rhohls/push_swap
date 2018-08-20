@@ -29,7 +29,7 @@ def shell_exe(array_string):
 
 
 
-    if lines[0] == "KO\n":
+    if lines[0] == ("KO\n" or "Error\n"):
         script = "sh pusher.sh"
         args = script 
         args = args.split()
@@ -44,7 +44,7 @@ def shell_exe(array_string):
         for line in lines:
             print(line, end='')
 
-length = 5
+length = 20
 array = random.sample(range(0, length), length)
 array_str = ' '.join(map(str, array))
 

@@ -107,3 +107,36 @@ t_list *rot_min(t_list *instruction, t_stack *stack_a, t_stack *stack_b)
 	// print_stacks(stack_a, stack_b);
 	return (instruction);
 }
+
+
+ t_list *rot_max_b(t_list *instruction, t_stack *stack_a, t_stack *stack_b)
+{
+	int min_b;
+	int ind_min_b;
+	int min_direction_b; 
+
+	min_b = min_stack(stack_b, &ind_min_b);
+	min_direction_b = (ind_min_b > (int)stack_b->length / 2) ? 0 : 1;
+
+	printf("direction b: %d  ind_b %d\n", min_direction_b, ind_min_b);
+
+	if (min_direction_b)
+	{
+		while (ind_min_b != 0)
+		{
+			do_instruction(instruction, "rrb\n", stack_a, stack_b);
+			printf("doing - rb\n");
+			ind_min_b--;
+		}
+	}
+	else 
+	{
+		while (ind_min_b != (int)stack_b->length)
+		{
+			do_instruction(instruction, "rb\n", stack_a, stack_b);
+			printf("doing - rra\n");
+			ind_min_b++;
+		}
+	}
+	return (instruction);
+}

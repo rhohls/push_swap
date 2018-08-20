@@ -66,8 +66,9 @@ typedef struct	s_psvar
 {
 	t_stack		*stack_a;
 	t_stack		*stack_b;
-	t_stack		*instructions;
-	t_stack		*inserts;	
+	t_list		*instructions;
+	t_stack		*inserts;
+	int			init;
 }				t_psvar;
 
 #endif

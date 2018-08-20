@@ -13,8 +13,8 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "./push_swap_struct.h"
 # include "../libft/includes/libft.h"
+# include "./push_swap_struct.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
@@ -69,5 +69,7 @@ t_list	*rot_min_a(t_list *instruction, t_stack *stack_a, t_stack *stack_b);
 
 int	mini_insert(t_stack *stack_a, t_stack *stack_b, t_psflags *flags);
 int		stack_sorted_anyorder(t_stack *stack_a);
+int		insert(t_stack *stack_a, t_stack *stack_b, t_psflags *flags);
+ t_list *rot_max_b(t_list *instruction, t_stack *stack_a, t_stack *stack_b);
 
 #endif
