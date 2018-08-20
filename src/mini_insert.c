@@ -53,22 +53,7 @@ t_list *insert_loop(t_stack *stack_a, t_stack *stack_b, t_list *instruction)
 	return (instruction);
 }
 
-void	ft_lstfreeone(t_list **alst)
-{
-	// if ((*alst)->content)
-	// 	free((*alst)->content);
-	free((void **)alst);
-}
 
-void	ft_lstfree(t_list **alst)
-{
-	if (alst)
-	{
-		if ((*alst)->next != NULL)
-			ft_lstfree(&((*alst)->next));
-		ft_lstfreeone(alst);
-	}
-}
 
 int	mini_insert(t_stack *stack_a, t_stack *stack_b, t_psflags *flags)
 {
@@ -98,21 +83,21 @@ int	mini_insert(t_stack *stack_a, t_stack *stack_b, t_psflags *flags)
 	{
 
 		
-		get_next_line(0,&line);
-		free(line);
-		printf("1\n");
+		// get_next_line(0,&line);
+		// free(line);
+		// printf("1\n");
 
 		instruction = insert_loop(stack_a, stack_b, instruction);
 
-		get_next_line(0,&line);
-		free(line);
-		printf("2\n");
+		// get_next_line(0,&line);
+		// free(line);
+		// printf("2\n");
 
 		rot_min_a(instruction, stack_a, stack_b);
 
-		get_next_line(0,&line);
-		free(line);
-		printf("3\n");
+		// get_next_line(0,&line);
+		// free(line);
+		// printf("3\n");
 
 		instruction = merge(stack_a, stack_b, instruction);
 		get_next_line(0,&line);
@@ -121,9 +106,9 @@ int	mini_insert(t_stack *stack_a, t_stack *stack_b, t_psflags *flags)
 	}
 
 	print_instructions(flags, instruction);
-	get_next_line(0,&line);
-	free(line);
-	printf("5\n");
+	// get_next_line(0,&line);
+	// free(line);
+	// printf("5\n");
 
 	// ft_lstfree(&instruction);
 	free(instruction->content);

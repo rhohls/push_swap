@@ -69,6 +69,8 @@ char		**ft_strsplit(char const *str, char c)
 	{
 		curr_strlen = ft_strlen_del((char *)(&str[index[0]]), c);
 		str_array[index[1]] = ft_strsub(str, index[0], curr_strlen);
+		printf("allocated address: %p\n", str_array[index[1]]);
+		fflush(stdout);
 		index[0] += curr_strlen;
 		while (str[index[0]] == c)
 			index[0]++;
